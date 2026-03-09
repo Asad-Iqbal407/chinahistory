@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Cormorant_Garamond, Public_Sans } from "next/font/google";
 
 import { SiteHeader } from "@/components/site-header";
@@ -34,7 +35,25 @@ export default function RootLayout({
           <SiteHeader />
           <main className="site-main">{children}</main>
           <footer className="site-footer">
-            <p>Use the map, timelines, and theme pages to move from geography to long-term history.</p>
+            <div className="footer-brand">
+              <span className="footer-logo">China Atlas</span>
+              <p className="footer-tagline">An immersive journey through Chinese civilization, dynasties, and modern transformation.</p>
+            </div>
+            <div className="footer-links">
+              <div className="footer-col">
+                <h4>Explore</h4>
+                <Link href="/historical-places">Historical Places</Link>
+                <Link href="/themes/civilization">Civilization</Link>
+                <Link href="/themes/dynasties">Dynasties</Link>
+                <Link href="/themes/wars-and-revolutions">Wars & Revolutions</Link>
+              </div>
+              <div className="footer-col">
+                <h4>Discover</h4>
+                <Link href="/themes/science-and-innovation">Science & Innovation</Link>
+                <Link href="/themes/modern-transformation">Modern Transformation</Link>
+              </div>
+            </div>
+            <p className="footer-bottom">Use the map, timelines, and theme pages to move from geography to long-term history.</p>
           </footer>
         </div>
       </body>

@@ -26,7 +26,7 @@
   background:
     radial-gradient(circle at 18% 22%, rgba(195, 90, 43, 0.2), transparent 28%),
     radial-gradient(circle at 82% 12%, rgba(138, 92, 47, 0.2), transparent 34%),
-    rgba(9, 18, 26, 0.94);
+    var(--panel-strong);
 }
 
 .heroCopy {
@@ -68,16 +68,16 @@
   padding: 0.95rem 1rem;
   border: 1px solid rgba(223, 177, 92, 0.14);
   border-radius: 1.2rem;
-  background: rgba(10, 19, 28, 0.7);
+  background: var(--chip-bg);
 }
 
 .metricCard span {
   font-size: 0.82rem;
-  color: rgba(243, 236, 223, 0.64);
+  color: var(--text-muted);
 }
 
 .metricCard strong {
-  color: #fff7eb;
+  color: var(--text-strong);
   font-size: 1.08rem;
 }
 
@@ -299,7 +299,7 @@
 }
 
 .sourceItem small {
-  color: rgba(243, 236, 223, 0.55);
+  color: var(--text-faint);
   overflow-wrap: anywhere;
 }
 
@@ -351,3 +351,4 @@
     min-height: 220px;
   }
 }
+

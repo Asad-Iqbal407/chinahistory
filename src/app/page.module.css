@@ -19,7 +19,7 @@
 .themeCard {
   border: 1px solid var(--line);
   background: var(--panel);
-  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.28);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.28), 0 0 40px rgba(223, 177, 92, 0.05);
 }
 
 .heroCopy {
@@ -34,14 +34,21 @@
 .themeEyebrow,
 .panelKicker,
 .timelineSpan {
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  font-size: 0.74rem;
-  color: rgba(223, 177, 92, 0.8);
+  font-size: 1.1rem;
+  color: var(--gold);
+  font-weight: 700;
 }
 
 .heroCopy h1 {
   font-size: clamp(3.2rem, 8vw, 5.8rem);
+  background: linear-gradient(135deg, #fff8e7 0%, #f5d890 30%, #dfb15c 60%, #c9a14a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(223, 177, 92, 0.25));
+  line-height: 1.1;
 }
 
 .heroText {
@@ -76,8 +83,9 @@
 }
 
 .secondaryCta {
-  border: 1px solid rgba(223, 177, 92, 0.25);
-  background: rgba(12, 24, 34, 0.62);
+  border: 1px solid var(--nav-border);
+  background: var(--nav-bg);
+  color: var(--nav-text);
 }
 
 .primaryCta:hover,
@@ -131,10 +139,16 @@
   gap: 0.45rem;
   padding: 1.15rem 1.2rem;
   border-radius: 1.4rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(4, 9, 14, 0.35), 0 0 30px rgba(223, 177, 92, 0.1);
 }
 
 .statCard span {
-  color: rgba(243, 236, 223, 0.66);
+  color: var(--text-muted);
   font-size: 0.85rem;
 }
 
@@ -159,6 +173,11 @@
 
 .sectionHeading h2 {
   font-size: clamp(2.2rem, 4vw, 3.3rem);
+  background: linear-gradient(135deg, #fff8e7 0%, #e8c88a 50%, #dfb15c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 6px rgba(223, 177, 92, 0.2));
 }
 
 .themeGrid {
@@ -171,7 +190,12 @@
   border-radius: 1.7rem;
   transition:
     transform 180ms ease,
-    border-color 180ms ease;
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.themeCard:hover {
+  box-shadow: 0 20px 60px rgba(4, 9, 14, 0.4), 0 0 40px rgba(223, 177, 92, 0.12);
 }
 
 .themeImage {
@@ -191,6 +215,10 @@
 
 .themeBody h3 {
   font-size: 2rem;
+  background: linear-gradient(135deg, #fff8e7 0%, #f5d890 40%, #dfb15c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .themeMeta {
@@ -206,10 +234,20 @@
   gap: 0.55rem;
   padding: 1.2rem;
   border-radius: 1.45rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.timelineCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(4, 9, 14, 0.35), 0 0 30px rgba(47, 107, 99, 0.1);
 }
 
 .timelineCard h3 {
   font-size: 1.8rem;
+  background: linear-gradient(135deg, #a8e6cf 0%, #4a9a8e 50%, #2f6b63 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .archiveGrid {
@@ -219,6 +257,12 @@
 .archiveCard {
   overflow: hidden;
   border-radius: 1.5rem;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.archiveCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(4, 9, 14, 0.35), 0 0 30px rgba(195, 90, 43, 0.1);
 }
 
 .archiveImage {
@@ -278,3 +322,4 @@
     font-size: 3rem;
   }
 }
+

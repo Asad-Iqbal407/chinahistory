@@ -5,10 +5,34 @@
   --panel-strong: rgba(9, 18, 26, 0.94);
   --text: #f3ecdf;
   --text-soft: rgba(243, 236, 223, 0.72);
+  --text-strong: #fff7eb;
+  --text-muted: rgba(243, 236, 223, 0.64);
+  --text-faint: rgba(243, 236, 223, 0.55);
   --gold: #dfb15c;
   --rust: #c35a2b;
   --jade: #2f6b63;
   --line: rgba(223, 177, 92, 0.18);
+  --chip-bg: rgba(10, 19, 28, 0.72);
+  --header-bg: rgba(8, 18, 26, 0.75);
+  --header-border: rgba(223, 177, 92, 0.1);
+  --header-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --nav-bg: rgba(8, 16, 23, 0.55);
+  --nav-text: rgba(241, 236, 226, 0.86);
+  --nav-border: rgba(223, 177, 92, 0.25);
+  --nav-hover-bg: rgba(195, 90, 43, 0.25);
+  --nav-hover-border: rgba(223, 177, 92, 0.65);
+  --nav-hover-text: rgba(255, 248, 238, 1);
+  
+  /* Enhanced heading colors */
+  --heading-gold: linear-gradient(135deg, #f5d890 0%, #dfb15c 40%, #c9a14a 100%);
+  --heading-warm: linear-gradient(135deg, #ffe4c4 0%, #e8b87a 50%, #d4a056 100%);
+  --heading-accent: linear-gradient(135deg, #ffd89b 0%, #c35a2b 60%, #dfb15c 100%);
+  --heading-jade: linear-gradient(135deg, #7fccc4 0%, #4a9a8e 50%, #2f6b63 100%);
+  
+  /* Glow effects */
+  --glow-gold: 0 0 30px rgba(223, 177, 92, 0.25);
+  --glow-rust: 0 0 30px rgba(195, 90, 43, 0.25);
+  --glow-jade: 0 0 30px rgba(47, 107, 99, 0.25);
 }
 
 html,
@@ -21,8 +45,10 @@ body {
 body {
   color: var(--text);
   background:
-    radial-gradient(circle at 18% 18%, rgba(195, 90, 43, 0.16), transparent 22%),
-    radial-gradient(circle at 80% 12%, rgba(47, 107, 99, 0.16), transparent 28%),
+    radial-gradient(circle at 12% 8%, rgba(195, 90, 43, 0.22) 0%, transparent 35%),
+    radial-gradient(circle at 88% 5%, rgba(47, 107, 99, 0.2) 0%, transparent 30%),
+    radial-gradient(circle at 50% 95%, rgba(223, 177, 92, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 75% 75%, rgba(195, 90, 43, 0.08) 0%, transparent 25%),
     linear-gradient(180deg, #071118 0%, #0b1821 42%, #071118 100%);
   font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,6 +73,32 @@ h4 {
   font-family: var(--font-display), serif;
   font-weight: 600;
   line-height: 0.95;
+  background: var(--heading-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h1 {
+  background: var(--heading-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(223, 177, 92, 0.15));
+}
+
+h2 {
+  background: var(--heading-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h3 {
+  background: var(--heading-warm);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 p,
@@ -79,10 +131,76 @@ select {
 .site-footer {
   width: min(1180px, calc(100vw - 2rem));
   margin: 0 auto;
-  padding: 2.5rem 0 3.5rem;
+  padding: 3rem 0 3.5rem;
   border-top: 1px solid var(--line);
   display: grid;
-  gap: 0.3rem;
+  gap: 2rem;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 
+    "brand links"
+    "bottom bottom";
+}
+
+.footer-brand {
+  grid-area: brand;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  font-family: var(--font-display), serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f5d890 0%, #dfb15c 40%, #c35a2b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-tagline {
+  font-size: 0.9rem;
+  color: rgba(243, 236, 223, 0.6);
+  max-width: 30ch;
+}
+
+.footer-links {
+  grid-area: links;
+  display: flex;
+  gap: 3rem;
+}
+
+.footer-col {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.footer-col h4 {
+  font-family: var(--font-display), serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: none;
+  -webkit-text-fill-color: var(--gold);
+}
+
+.footer-col a {
+  font-size: 0.9rem;
+  color: rgba(243, 236, 223, 0.7);
+  transition: color 180ms ease;
+}
+
+.footer-col a:hover {
+  color: var(--gold);
+}
+
+.footer-bottom {
+  grid-area: bottom;
+  font-size: 0.85rem;
+  color: rgba(243, 236, 223, 0.5);
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(223, 177, 92, 0.1);
 }
 
 ::selection {
@@ -95,4 +213,114 @@ select {
   .site-footer {
     width: min(1180px, calc(100vw - 1rem));
   }
+  
+  .site-footer {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "brand"
+      "links"
+      "bottom";
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+/* Simple Mode - Clean, minimal styling with white background */
+body.simple-mode {
+  --bg: #fcfaf5;
+  --bg-soft: #ffffff;
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-strong: rgba(255, 255, 255, 0.97);
+  --text: #18232d;
+  --text-soft: rgba(24, 35, 45, 0.78);
+  --text-strong: #101923;
+  --text-muted: rgba(24, 35, 45, 0.62);
+  --text-faint: rgba(24, 35, 45, 0.48);
+  --line: rgba(24, 35, 45, 0.12);
+  --chip-bg: rgba(244, 239, 231, 0.96);
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --header-border: rgba(24, 35, 45, 0.08);
+  --header-shadow: 0 8px 28px rgba(17, 25, 34, 0.08);
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-text: rgba(24, 35, 45, 0.82);
+  --nav-border: rgba(24, 35, 45, 0.12);
+  --nav-hover-bg: rgba(44, 79, 112, 0.1);
+  --nav-hover-border: rgba(44, 79, 112, 0.24);
+  --nav-hover-text: #17324b;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(44, 79, 112, 0.08) 0%, transparent 32%),
+    radial-gradient(circle at 88% 5%, rgba(47, 107, 99, 0.08) 0%, transparent 28%),
+    radial-gradient(circle at 50% 95%, rgba(195, 90, 43, 0.06) 0%, transparent 38%),
+    linear-gradient(180deg, #fffdf9 0%, #f7f3ea 50%, #fffdf9 100%);
+}
+
+body.simple-mode .site-shell {
+  background: #ffffff;
+}
+
+body.simple-mode h1,
+body.simple-mode h2,
+body.simple-mode h3,
+body.simple-mode h4 {
+  background: none;
+  -webkit-text-fill-color: #1a1a1a;
+  filter: none;
+}
+
+body.simple-mode p,
+body.simple-mode li {
+  color: var(--text-soft);
+}
+
+body.simple-mode .brandMark {
+  background: none;
+  -webkit-text-fill-color: #1a1a1a;
+  filter: none;
+}
+
+body.simple-mode .brandSubline {
+  color: var(--text-muted);
+}
+
+body.simple-mode .footer-logo {
+  background: none;
+  -webkit-text-fill-color: #1a1a1a;
+  filter: none;
+}
+
+body.simple-mode .footer-tagline {
+  color: var(--text-muted);
+}
+
+body.simple-mode .footer-col h4 {
+  color: var(--text);
+}
+
+body.simple-mode .footer-col a {
+  color: var(--text-soft);
+}
+
+body.simple-mode .footer-col a:hover {
+  color: var(--text);
+}
+
+body.simple-mode .footer-bottom {
+  color: var(--text-faint);
+}
+
+body.simple-mode .site-footer {
+  background: transparent;
+  box-shadow: none;
+  border-top-color: var(--line);
+}
+
+body.simple-mode .eyebrow,
+body.simple-mode .sectionKicker,
+body.simple-mode .themeEyebrow,
+body.simple-mode .panelKicker,
+body.simple-mode .timelineSpan {
+  color: var(--text-muted);
 }

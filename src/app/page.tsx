@@ -28,12 +28,15 @@ export default function Home() {
           <p className={styles.heroText}>
             This site is built as a long-form atlas rather than a short summary. Use the
             map to move by region, then open deep pages on civilization, dynasties, the
-            century of humiliation, wars and revolutions, scientific progress, and modern
-            transformation.
+            century of humiliation, wars and revolutions, scientific progress, modern
+            transformation, and major historical places.
           </p>
           <div className={styles.heroActions}>
             <Link href="/themes/civilization" className={styles.primaryCta}>
               Start with civilization
+            </Link>
+            <Link href="/historical-places" className={styles.secondaryCta}>
+              Browse historical places
             </Link>
             <Link href="/themes/science-and-innovation" className={styles.secondaryCta}>
               Jump to science and innovation
@@ -55,6 +58,7 @@ export default function Home() {
             <p className={styles.panelKicker}>What this covers</p>
             <ul className={styles.panelList}>
               <li>Early farming, writing, belief, and regional civilizational zones</li>
+              <li>Historical places, capitals, cave temples, canals, and frontier sites</li>
               <li>Imperial dynasties, capitals, institutions, and collapse patterns</li>
               <li>Nineteenth- and twentieth-century foreign pressure, reform, and recovery</li>
               <li>Military history from frontier strategy to revolutionary warfare</li>
@@ -95,6 +99,25 @@ export default function Home() {
           </h2>
         </div>
         <div className={styles.themeGrid}>
+          <Link href="/historical-places" className={styles.themeCard}>
+            <div className={styles.themeImage}>
+              <Image
+                src={imageCatalog["great-wall-jinshanling"].src}
+                alt={imageCatalog["great-wall-jinshanling"].alt}
+                fill
+                sizes="(max-width: 900px) 100vw, 30vw"
+              />
+            </div>
+            <div className={styles.themeBody}>
+              <p className={styles.themeEyebrow}>Landmarks and sites</p>
+              <h3>Historical Places</h3>
+              <p>
+                A fast guide to major places across China, with short descriptions of the
+                sites that carry the most historical weight.
+              </p>
+              <span className={styles.themeMeta}>Across all eras</span>
+            </div>
+          </Link>
           {themeList.map((theme) => {
             const image = imageCatalog[theme.heroImage];
 

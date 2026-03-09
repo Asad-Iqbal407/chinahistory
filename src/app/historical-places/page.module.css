@@ -1,0 +1,298 @@
+.page {
+  display: grid;
+  gap: 2.6rem;
+  padding-top: 1.2rem;
+}
+
+.hero,
+.introSection,
+.groupIntro,
+.placeCard,
+.relatedCard {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.24);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+  gap: 1.3rem;
+  padding: 1.5rem;
+  border-radius: 2.4rem;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(195, 90, 43, 0.2), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(138, 92, 47, 0.2), transparent 34%),
+    var(--panel-strong);
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.backLink,
+.eyebrow,
+.sectionKicker {
+  font-size: 0.76rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(223, 177, 92, 0.82);
+}
+
+.heroCopy h1 {
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  max-width: 8ch;
+}
+
+.subtitle {
+  max-width: 58ch;
+  font-size: 1.04rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.metricCard {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(223, 177, 92, 0.14);
+  border-radius: 1.2rem;
+  background: var(--chip-bg);
+}
+
+.metricCard span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.metricCard strong {
+  color: var(--text-strong);
+}
+
+.heroMosaic {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.85rem;
+  min-height: 31rem;
+}
+
+.mosaicMain,
+.mosaicSmall,
+.mosaicWide,
+.groupImage,
+.placeImage {
+  position: relative;
+  overflow: hidden;
+}
+
+.mosaicMain {
+  grid-row: 1 / span 2;
+  border-radius: 2rem;
+}
+
+.mosaicSmall,
+.mosaicWide,
+.groupImage {
+  border-radius: 1.4rem;
+}
+
+.mosaicMain :global(img),
+.mosaicSmall :global(img),
+.mosaicWide :global(img),
+.groupImage :global(img),
+.placeImage :global(img) {
+  object-fit: cover;
+}
+
+.introSection,
+.groupSection,
+.relatedSection {
+  display: grid;
+  gap: 1rem;
+}
+
+.introSection {
+  padding: 1.4rem;
+  border-radius: 1.8rem;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 68ch;
+}
+
+.sectionHeading h2,
+.groupCopy h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.introGrid,
+.placeGrid,
+.relatedGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.introGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.groupIntro {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1.08fr);
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1.8rem;
+}
+
+.groupIntroReverse {
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+}
+
+.groupIntroReverse .groupImage {
+  order: 2;
+}
+
+.groupIntroReverse .groupCopy {
+  order: 1;
+}
+
+.groupImage {
+  min-height: 280px;
+}
+
+.groupCopy {
+  display: grid;
+  align-content: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+}
+
+.placeGrid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.placeCard {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.placeCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 28px 80px rgba(4, 9, 14, 0.28);
+}
+
+.placeImage {
+  min-height: 220px;
+  border-bottom: 1px solid var(--line);
+}
+
+.placeBody {
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+  padding: 1.15rem 1.2rem 1.3rem;
+}
+
+.placeMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.placeMeta span {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.placeCard h3,
+.relatedCard h3 {
+  font-size: 1.85rem;
+}
+
+.placeCard p {
+  color: var(--text-muted);
+  line-height: 1.72;
+}
+
+.relatedGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.relatedCard {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  border-radius: 1.5rem;
+  transition: transform 180ms ease;
+}
+
+.relatedCard:hover {
+  transform: translateY(-2px);
+}
+
+.relatedCard span {
+  color: rgba(223, 177, 92, 0.82);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .introGrid,
+  .groupIntro,
+  .groupIntroReverse,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .groupIntroReverse .groupImage,
+  .groupIntroReverse .groupCopy {
+    order: initial;
+  }
+}
+
+@media (max-width: 760px) {
+  .metrics,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroMosaic {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.3fr 0.8fr 0.8fr;
+    min-height: auto;
+  }
+
+  .mosaicMain {
+    grid-row: auto;
+    min-height: 280px;
+  }
+
+  .mosaicSmall,
+  .mosaicWide,
+  .groupImage {
+    min-height: 220px;
+  }
+}

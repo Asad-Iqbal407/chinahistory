@@ -1,0 +1,164 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+import { imageCatalog } from "@/data/china-content";
+import {
+  historicalPlaceGroups,
+  historicalPlacesHero,
+} from "@/data/historical-places";
+
+import styles from "./page.module.css";
+
+export const metadata: Metadata = {
+  title: "Historical Places | China Atlas",
+  description:
+    "A curated guide to major historical places across China, with short descriptions of key cities, capitals, temples, routes, and memory sites.",
+};
+
+export default function HistoricalPlacesPage() {
+  return (
+    <article className={styles.page}>
+      <section className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <Link href="/" className={styles.backLink}>
+            Back to map atlas
+          </Link>
+          <p className={styles.eyebrow}>{historicalPlacesHero.eyebrow}</p>
+          <h1>{historicalPlacesHero.title}</h1>
+          <p className={styles.subtitle}>{historicalPlacesHero.subtitle}</p>
+          <div className={styles.metrics}>
+            {historicalPlacesHero.metrics.map((metric) => (
+              <article key={metric.label} className={styles.metricCard}>
+                <span>{metric.label}</span>
+                <strong>{metric.value}</strong>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.heroMosaic}>
+          <div className={styles.mosaicMain}>
+            <Image
+              src={imageCatalog["great-wall-jinshanling"].src}
+              alt={imageCatalog["great-wall-jinshanling"].alt}
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 34vw"
+            />
+          </div>
+          <div className={styles.mosaicSmall}>
+            <Image
+              src={imageCatalog["terracotta-army"].src}
+              alt={imageCatalog["terracotta-army"].alt}
+              fill
+              sizes="(max-width: 900px) 100vw, 18vw"
+            />
+          </div>
+          <div className={styles.mosaicWide}>
+            <Image
+              src={imageCatalog["dunhuang-mural"].src}
+              alt={imageCatalog["dunhuang-mural"].alt}
+              fill
+              sizes="(max-width: 900px) 100vw, 22vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.introSection}>
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>How to read this page</p>
+          <h2>Use it as a fast historical guide to places that carry the largest weight in Chinese memory.</h2>
+        </div>
+        <div className={styles.introGrid}>
+          <p>
+            This page is a curated list rather than an exhaustive catalog. It brings
+            together places that matter for origins, empire, trade, religion, war, and
+            modern transformation.
+          </p>
+          <p>
+            Some are surviving monuments, some are cities layered with several pasts,
+            and some are memory sites that became important because major turning points
+            happened there.
+          </p>
+        </div>
+      </section>
+
+      {historicalPlaceGroups.map((group, index) => {
+        const image = imageCatalog[group.image];
+
+        return (
+          <section key={group.slug} className={styles.groupSection}>
+            <div
+              className={[
+                styles.groupIntro,
+                index % 2 === 1 ? styles.groupIntroReverse : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              <div className={styles.groupImage}>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 38vw"
+                />
+              </div>
+              <div className={styles.groupCopy}>
+                <p className={styles.sectionKicker}>Historical places</p>
+                <h2>{group.title}</h2>
+                <p>{group.subtitle}</p>
+              </div>
+            </div>
+
+            <div className={styles.placeGrid}>
+              {group.places.map((place) => (
+                <article key={place.name} className={styles.placeCard}>
+                  <div className={styles.placeImage}>
+                    <Image
+                      src={imageCatalog[place.image].src}
+                      alt={imageCatalog[place.image].alt}
+                      fill
+                      sizes="(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className={styles.placeBody}>
+                    <div className={styles.placeMeta}>
+                      <span>{place.location}</span>
+                      <span>{place.period}</span>
+                    </div>
+                    <h3>{place.name}</h3>
+                    <p>{place.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        );
+      })}
+
+      <section className={styles.relatedSection}>
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>Continue exploring</p>
+          <h2>Move from places to the larger stories they belong to.</h2>
+        </div>
+        <div className={styles.relatedGrid}>
+          <Link href="/themes/civilization" className={styles.relatedCard}>
+            <span>Civilization</span>
+            <h3>Origins, writing, belief, and long cultural continuities.</h3>
+          </Link>
+          <Link href="/themes/dynasties" className={styles.relatedCard}>
+            <span>Dynasties</span>
+            <h3>Capitals, courts, and the political sequence of empire.</h3>
+          </Link>
+          <Link href="/themes/wars-and-revolutions" className={styles.relatedCard}>
+            <span>Wars</span>
+            <h3>Sites of invasion, resistance, rebellion, and revolutionary change.</h3>
+          </Link>
+        </div>
+      </section>
+    </article>
+  );
+}

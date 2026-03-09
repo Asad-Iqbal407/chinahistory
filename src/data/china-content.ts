@@ -182,6 +182,13 @@ export const imageCatalog = {
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Skyline_of_Shenzhen_from_Hong_Kong.jpg",
   },
+  "liangzhu-site": {
+    src: "/images/china/liangzhu-site.jpg",
+    alt: "Archaeological landscape at the ruins of Liangzhu City.",
+    creditLabel: "Archaeological ruins of Liangzhu City",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:%E6%9D%AD%E5%B7%9E%E8%89%AF%E6%B8%9A%E9%81%97%E5%9D%80%E5%85%AC%E5%9B%AD,_2022-11-12_03.jpg",
+  },
   "liangzhu-jade-cong": {
     src: "/images/china/liangzhu-jade-cong.jpg",
     alt: "Liangzhu culture jade cong ritual object.",
@@ -189,12 +196,26 @@ export const imageCatalog = {
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Liangzhu_Culture_Jade_Cong_08.jpg",
   },
+  "yinxu-site": {
+    src: "/images/china/yinxu-site.jpg",
+    alt: "Excavated ruins and museum landscape at Yinxu in Anyang.",
+    creditLabel: "Yinxu archaeological site in Anyang",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:26120-Anyang_(49086436522).jpg",
+  },
   "oracle-bone": {
     src: "/images/china/oracle-bone-inscription.jpg",
     alt: "Oracle bone inscription from Yinxu used for divination.",
     creditLabel: "Yinxu Oracle Bone Inscriptions for Divination",
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Yinxu_Oracle_Bone_Inscriptions_for_Divination_(10185440455)_cropped.jpg",
+  },
+  "banpo-museum": {
+    src: "/images/china/banpo-museum.jpg",
+    alt: "Banpo Museum preserving the remains of the Neolithic Banpo settlement.",
+    creditLabel: "Banpo Museum",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Banpo_Museus.JPG",
   },
   "bamboo-slips": {
     src: "/images/china/bamboo-slips.jpg",
@@ -210,6 +231,27 @@ export const imageCatalog = {
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Temple_of_Confucius,_Qufu,_China_(29942258465).jpg",
   },
+  "xian-city-wall": {
+    src: "/images/china/xian-city-wall.jpg",
+    alt: "The fortifications of Xi'an tracing the historic capital landscape.",
+    creditLabel: "Fortifications of Xi'an",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:City_wall_of_Xi%27an_51550-Xian_(27959363326).jpg",
+  },
+  "mogao-caves": {
+    src: "/images/china/mogao-caves.jpg",
+    alt: "Cliffside facades and cave openings at the Mogao Caves in Dunhuang.",
+    creditLabel: "Mogao Caves",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Mogao_Caves_(54376969262).jpg",
+  },
+  "longmen-grottoes": {
+    src: "/images/china/longmen-grottoes.jpg",
+    alt: "The Longmen Grottoes carved into the limestone cliffs near Luoyang.",
+    creditLabel: "Longmen Grottoes",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:27427-Luoyang_(49067744628).jpg",
+  },
   "suzhou-grand-canal": {
     src: "/images/china/suzhou-grand-canal.jpg",
     alt: "View of the Grand Canal in Suzhou.",
@@ -217,12 +259,40 @@ export const imageCatalog = {
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Suzhou_Grand_Canal_1984_A.jpg",
   },
+  "mount-tai": {
+    src: "/images/china/mount-tai.jpg",
+    alt: "Stone steps and pilgrims ascending through the South Gate of Heaven on Mount Tai.",
+    creditLabel: "Mount Tai South Gate of Heaven",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:%E6%B3%B0%E5%B1%B1_%E5%8D%97%E5%A4%A9%E9%97%A8.jpg",
+  },
+  "west-lake": {
+    src: "/images/china/west-lake.jpg",
+    alt: "Boats and tree-lined water at West Lake in Hangzhou.",
+    creditLabel: "West Lake, Hangzhou",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:West_Lake,_Hangzhou_2025.jpg",
+  },
   "longjing-tea-fields": {
     src: "/images/china/longjing-tea-fields.jpg",
     alt: "Tea plantations in Longjing near Hangzhou.",
     creditLabel: "Tea plantations in Longjing, Hangzhou",
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Tea_plantations_in_Longjing,_Hangzhou.jpg",
+  },
+  "the-bund": {
+    src: "/images/china/the-bund.jpg",
+    alt: "Historic waterfront buildings along the Bund in Shanghai.",
+    creditLabel: "The Bund",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:The_Bund_2.jpg",
+  },
+  "nanjing-massacre-memorial": {
+    src: "/images/china/nanjing-massacre-memorial.jpg",
+    alt: "Memorial Hall of the Victims in Nanjing Massacre by Japanese Invaders.",
+    creditLabel: "Nanjing Massacre Memorial Hall",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:%E5%8D%97%E4%BA%AC%E5%A4%A7%E5%B1%A0%E6%9D%80%E7%BA%AA%E5%BF%B5%E9%A6%86%E5%A4%A7%E5%B1%A0%E6%9D%80%E5%8D%81%E5%AD%97%E6%9E%B6.jpg",
   },
   "shang-bronze-ding": {
     src: "/images/china/shang-bronze-ding.jpg",

@@ -95,11 +95,11 @@
 
 .factChip span {
   font-size: 0.82rem;
-  color: rgba(243, 236, 223, 0.62);
+  color: var(--text-muted);
 }
 
 .factChip strong {
-  color: #fff7eb;
+  color: var(--text-strong);
 }
 
 .introSection,
@@ -245,7 +245,7 @@
 }
 
 .sourceItem small {
-  color: rgba(243, 236, 223, 0.55);
+  color: var(--text-faint);
   overflow-wrap: anywhere;
 }
 
