@@ -1,0 +1,359 @@
+.page {
+  display: grid;
+  gap: 2.6rem;
+  padding-top: 1.2rem;
+}
+
+.hero,
+.introSection,
+.systemCard,
+.regionCard,
+.topicCard,
+.rhythmImageCard,
+.rhythmCopy,
+.timelineCard,
+.sourceItem {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.24);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+  gap: 1.3rem;
+  padding: 1.5rem;
+  border-radius: 2.4rem;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(44, 79, 112, 0.28), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(39, 135, 116, 0.18), transparent 34%),
+    rgba(9, 18, 26, 0.94);
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.backLink,
+.eyebrow,
+.sectionKicker,
+.bandEyebrow {
+  font-size: 0.76rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(223, 177, 92, 0.82);
+}
+
+.heroCopy h1 {
+  font-size: clamp(3.2rem, 8vw, 6rem);
+  max-width: 8ch;
+}
+
+.subtitle {
+  max-width: 58ch;
+  font-size: 1.04rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.metricCard {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(223, 177, 92, 0.14);
+  border-radius: 1.2rem;
+  background: rgba(10, 19, 28, 0.7);
+}
+
+.metricCard span {
+  font-size: 0.82rem;
+  color: rgba(243, 236, 223, 0.64);
+}
+
+.metricCard strong {
+  color: #fff7eb;
+  font-size: 1.08rem;
+}
+
+.heroMosaic {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.85rem;
+  min-height: 31rem;
+}
+
+.mosaicMain,
+.mosaicSmall,
+.mosaicWide,
+.topicImage,
+.rhythmImage {
+  position: relative;
+  overflow: hidden;
+}
+
+.mosaicMain {
+  grid-row: 1 / span 2;
+  border-radius: 2rem;
+}
+
+.mosaicSmall,
+.mosaicWide {
+  border-radius: 1.4rem;
+}
+
+.mosaicMain :global(img),
+.mosaicSmall :global(img),
+.mosaicWide :global(img),
+.topicImage :global(img),
+.rhythmImage :global(img) {
+  object-fit: cover;
+}
+
+.introSection,
+.systemSection,
+.regionSection,
+.topicDeckSection,
+.rhythmSection,
+.timelineSection,
+.sourceSection {
+  display: grid;
+  gap: 1rem;
+}
+
+.introSection {
+  padding: 1.4rem;
+  border-radius: 1.8rem;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 68ch;
+}
+
+.sectionHeading h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.deckGrid,
+.systemGrid,
+.regionGrid,
+.topicDeck,
+.timelineGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.deckGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.systemGrid,
+.regionGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.systemCard,
+.regionCard,
+.timelineCard {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.2rem;
+  border-radius: 1.45rem;
+}
+
+.systemCard h3,
+.regionCard h3,
+.timelineCard h3,
+.topicBody h3,
+.rhythmCopy h3 {
+  font-size: 1.85rem;
+}
+
+.regionCard span,
+.timelineCard span {
+  color: rgba(223, 177, 92, 0.82);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topicDeck {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.topicCard {
+  display: grid;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.topicCard:hover,
+.bandLink:hover {
+  transform: translateY(-2px);
+}
+
+.topicImage {
+  min-height: 220px;
+}
+
+.topicBody {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.topicBody p {
+  color: rgba(223, 177, 92, 0.82);
+}
+
+.rhythmStack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.rhythmBand {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.88fr) minmax(0, 1.12fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.reverseBand {
+  grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.88fr);
+}
+
+.reverseBand .rhythmImageCard {
+  order: 2;
+}
+
+.reverseBand .rhythmCopy {
+  order: 1;
+}
+
+.rhythmImageCard,
+.rhythmCopy {
+  border-radius: 1.8rem;
+  overflow: hidden;
+}
+
+.rhythmImage {
+  min-height: 420px;
+}
+
+.rhythmImageCard figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+}
+
+.rhythmImageCard a {
+  color: rgba(223, 177, 92, 0.88);
+}
+
+.rhythmCopy {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.5rem;
+}
+
+.bandList {
+  display: grid;
+  gap: 0.45rem;
+  padding-left: 1rem;
+}
+
+.bandLink {
+  width: fit-content;
+  padding: 0.78rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(44, 79, 112, 0.98), rgba(93, 178, 143, 0.9));
+  color: #eef8f4;
+  font-weight: 700;
+  transition: transform 180ms ease;
+}
+
+.timelineGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sourceList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sourceItem {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.2rem;
+}
+
+.sourceItem small {
+  color: rgba(243, 236, 223, 0.55);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) {
+  .systemGrid,
+  .regionGrid,
+  .topicDeck,
+  .timelineGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .deckGrid,
+  .rhythmBand,
+  .reverseBand {
+    grid-template-columns: 1fr;
+  }
+
+  .reverseBand .rhythmImageCard,
+  .reverseBand .rhythmCopy {
+    order: initial;
+  }
+}
+
+@media (max-width: 720px) {
+  .metrics,
+  .systemGrid,
+  .regionGrid,
+  .topicDeck,
+  .timelineGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroMosaic {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.3fr 0.8fr 0.8fr;
+    min-height: auto;
+  }
+
+  .mosaicMain {
+    grid-row: auto;
+    min-height: 280px;
+  }
+
+  .mosaicSmall,
+  .mosaicWide,
+  .topicImage,
+  .rhythmImage {
+    min-height: 220px;
+  }
+}

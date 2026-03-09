@@ -1,0 +1,282 @@
+.page {
+  display: grid;
+  gap: 2.4rem;
+  padding-top: 1.2rem;
+}
+
+.hero,
+.introSection,
+.milestoneCard,
+.chapterImageCard,
+.chapterCopy,
+.relatedCard,
+.sourceItem {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.24);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+  gap: 1.2rem;
+  padding: 1.4rem;
+  border-radius: 2.2rem;
+  background:
+    radial-gradient(circle at 18% 24%, color-mix(in srgb, var(--topic-accent) 28%, transparent), transparent 28%),
+    rgba(9, 18, 26, 0.94);
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.backLink,
+.eyebrow,
+.sectionKicker {
+  font-size: 0.76rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(223, 177, 92, 0.82);
+}
+
+.heroCopy h1 {
+  font-size: clamp(3rem, 7vw, 5.8rem);
+}
+
+.subtitle {
+  max-width: 58ch;
+  font-size: 1.04rem;
+}
+
+.heroImage,
+.chapterImage,
+.relatedImage {
+  position: relative;
+}
+
+.heroImage {
+  min-height: 31rem;
+  overflow: hidden;
+  border-radius: 1.8rem;
+}
+
+.heroImage :global(img),
+.chapterImage :global(img),
+.relatedImage :global(img) {
+  object-fit: cover;
+}
+
+.factGrid,
+.introGrid,
+.milestoneGrid,
+.relatedGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.factGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.factCard {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(223, 177, 92, 0.15);
+  border-radius: 1.2rem;
+  background: rgba(10, 19, 28, 0.72);
+}
+
+.factCard span {
+  font-size: 0.82rem;
+  color: rgba(243, 236, 223, 0.65);
+}
+
+.factCard strong {
+  color: #fff7eb;
+}
+
+.introSection,
+.milestoneSection,
+.chapterSection,
+.relatedSection,
+.sourceSection {
+  display: grid;
+  gap: 1rem;
+}
+
+.introSection {
+  padding: 1.35rem;
+  border-radius: 1.8rem;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 66ch;
+}
+
+.sectionHeading h2 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+.introGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.milestoneGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.milestoneCard {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.15rem;
+  border-radius: 1.35rem;
+}
+
+.milestoneCard span {
+  color: color-mix(in srgb, var(--topic-accent) 68%, #dfb15c 32%);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.milestoneCard h3,
+.chapterCopy h3,
+.relatedBody h3 {
+  font-size: 1.9rem;
+}
+
+.chapterStack {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.chapterCard {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.chapterReverse {
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+}
+
+.chapterReverse .chapterImageCard {
+  order: 2;
+}
+
+.chapterReverse .chapterCopy {
+  order: 1;
+}
+
+.chapterImageCard,
+.chapterCopy {
+  border-radius: 1.7rem;
+  overflow: hidden;
+}
+
+.chapterImage {
+  min-height: 400px;
+}
+
+.chapterImageCard figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+}
+
+.chapterImageCard a {
+  color: rgba(223, 177, 92, 0.88);
+}
+
+.chapterCopy {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.4rem;
+}
+
+.bulletList {
+  display: grid;
+  gap: 0.45rem;
+  padding-left: 1rem;
+}
+
+.relatedGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.relatedCard {
+  display: grid;
+  overflow: hidden;
+  border-radius: 1.55rem;
+}
+
+.relatedImage {
+  min-height: 250px;
+}
+
+.relatedBody {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.relatedBody p {
+  color: rgba(223, 177, 92, 0.82);
+}
+
+.sourceList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sourceItem {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.2rem;
+}
+
+.sourceItem small {
+  color: rgba(243, 236, 223, 0.55);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1080px) {
+  .hero,
+  .chapterCard,
+  .chapterReverse,
+  .milestoneGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .chapterReverse .chapterImageCard,
+  .chapterReverse .chapterCopy {
+    order: initial;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero,
+  .introGrid,
+  .milestoneGrid,
+  .chapterCard,
+  .chapterReverse,
+  .relatedGrid,
+  .factGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .chapterImage {
+    min-height: 280px;
+  }
+}

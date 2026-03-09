@@ -1,0 +1,284 @@
+.page {
+  display: grid;
+  gap: 2.4rem;
+  padding-top: 1.2rem;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 42rem;
+  border: 1px solid var(--line);
+  border-radius: 2.4rem;
+}
+
+.heroImage,
+.galleryImage,
+.relatedImage {
+  position: relative;
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImage :global(img),
+.galleryImage :global(img),
+.relatedImage :global(img) {
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(4, 8, 13, 0.24), rgba(4, 8, 13, 0.82)),
+    linear-gradient(110deg, color-mix(in srgb, var(--accent) 48%, transparent), transparent 55%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  align-content: end;
+  min-height: 42rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.backLink,
+.sectionKicker,
+.eyebrow {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+  color: rgba(223, 177, 92, 0.86);
+}
+
+.heroContent h1 {
+  max-width: 11ch;
+  font-size: clamp(3.4rem, 10vw, 6.6rem);
+}
+
+.heroSubtitle {
+  max-width: 60ch;
+  font-size: 1.06rem;
+}
+
+.factRibbon {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+.factChip,
+.insightCard,
+.timelineEntry,
+.storyCard,
+.galleryCard,
+.relatedCard,
+.sourceItem,
+.introSection {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.24);
+}
+
+.factChip {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1.3rem;
+}
+
+.factChip span {
+  font-size: 0.82rem;
+  color: rgba(243, 236, 223, 0.62);
+}
+
+.factChip strong {
+  color: #fff7eb;
+}
+
+.introSection,
+.insightSection,
+.timelineSection,
+.sectionsBlock,
+.gallerySection,
+.relatedSection,
+.sourcesSection {
+  display: grid;
+  gap: 1rem;
+}
+
+.introSection {
+  border-radius: 2rem;
+  padding: 1.4rem;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 65ch;
+}
+
+.sectionHeading h2 {
+  font-size: clamp(2rem, 4vw, 3.1rem);
+}
+
+.introGrid,
+.insightGrid,
+.storyGrid,
+.galleryGrid,
+.relatedGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.introGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.insightGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.insightCard {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.15rem;
+  border-radius: 1.4rem;
+}
+
+.insightCard h3,
+.timelineEntry h3,
+.storyCard h3,
+.relatedBody h3 {
+  font-size: 2rem;
+}
+
+.timelineList {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.timelineEntry {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 1.45rem;
+}
+
+.timelineEntry > span {
+  color: color-mix(in srgb, var(--accent) 72%, #f3ecdf 28%);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.storyGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.storyCard {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.3rem;
+  border-radius: 1.6rem;
+}
+
+.bulletList {
+  display: grid;
+  gap: 0.45rem;
+  padding-left: 1rem;
+}
+
+.galleryGrid,
+.relatedGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.galleryCard,
+.relatedCard {
+  overflow: hidden;
+  border-radius: 1.55rem;
+}
+
+.galleryImage,
+.relatedImage {
+  min-height: 260px;
+}
+
+.galleryCard figcaption,
+.relatedBody {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem;
+}
+
+.galleryCard figcaption {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.galleryCard a {
+  color: rgba(223, 177, 92, 0.88);
+}
+
+.relatedBody p,
+.relatedBody span {
+  color: rgba(223, 177, 92, 0.8);
+}
+
+.sourceList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sourceItem {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.2rem;
+}
+
+.sourceItem small {
+  color: rgba(243, 236, 223, 0.55);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1080px) {
+  .factRibbon,
+  .insightGrid,
+  .galleryGrid,
+  .relatedGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .timelineEntry {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .introGrid,
+  .storyGrid,
+  .factRibbon,
+  .insightGrid,
+  .galleryGrid,
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero,
+  .heroContent {
+    min-height: 34rem;
+  }
+
+  .galleryImage,
+  .relatedImage {
+    min-height: 220px;
+  }
+}

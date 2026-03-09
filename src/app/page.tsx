@@ -1,66 +1,168 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import { ChinaMapExplorer } from "@/components/china-map-explorer";
+import {
+  heroStats,
+  imageCatalog,
+  siteTimeline,
+  themeList,
+} from "@/data/china-content";
+
 import styles from "./page.module.css";
+
+const archiveKeys = [
+  "great-wall-jinshanling",
+  "treaty-of-nanking-signing",
+  "tiangong",
+  "pudong",
+] as const;
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
+      <section className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>Immersive China Knowledge Site</p>
+          <h1>China in layers: map, memory, empire, war, science, and modern power.</h1>
+          <p className={styles.heroText}>
+            This site is built as a long-form atlas rather than a short summary. Use the
+            map to move by region, then open deep pages on civilization, dynasties, the
+            century of humiliation, wars and revolutions, scientific progress, and modern
+            transformation.
+          </p>
+          <div className={styles.heroActions}>
+            <Link href="/themes/civilization" className={styles.primaryCta}>
+              Start with civilization
+            </Link>
+            <Link href="/themes/science-and-innovation" className={styles.secondaryCta}>
+              Jump to science and innovation
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.heroPanel}>
+          <div className={styles.heroPanelImage}>
+            <Image
+              src={imageCatalog.pudong.src}
+              alt={imageCatalog.pudong.alt}
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 42vw"
+            />
+          </div>
+          <div className={styles.heroPanelBody}>
+            <p className={styles.panelKicker}>What this covers</p>
+            <ul className={styles.panelList}>
+              <li>Early farming, writing, belief, and regional civilizational zones</li>
+              <li>Imperial dynasties, capitals, institutions, and collapse patterns</li>
+              <li>Nineteenth- and twentieth-century foreign pressure, reform, and recovery</li>
+              <li>Military history from frontier strategy to revolutionary warfare</li>
+              <li>Scientific traditions, space, rail, telecoms, and modern infrastructure</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.statGrid}>
+        {heroStats.map((stat) => (
+          <article key={stat.label} className={styles.statCard}>
+            <span>{stat.label}</span>
+            <strong>{stat.value}</strong>
+          </article>
+        ))}
+      </section>
+
+      <section className={styles.mapSection}>
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>Explore by geography</p>
+          <h2>Hover provinces, follow corridors, and open the major themes from the map.</h2>
           <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+            The map highlights how historical meaning changes by place: classical
+            heartland, Silk Road corridors, treaty ports, wartime interiors, and modern
+            innovation zones.
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <ChinaMapExplorer />
+      </section>
+
+      <section className={styles.themeSection}>
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>Theme pages</p>
+          <h2>
+            Each category has its own dense page with a timeline, narrative sections, and
+            rich visuals.
+          </h2>
         </div>
-      </main>
+        <div className={styles.themeGrid}>
+          {themeList.map((theme) => {
+            const image = imageCatalog[theme.heroImage];
+
+            return (
+              <Link key={theme.slug} href={`/themes/${theme.slug}`} className={styles.themeCard}>
+                <div className={styles.themeImage}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 30vw"
+                  />
+                </div>
+                <div className={styles.themeBody}>
+                  <p className={styles.themeEyebrow}>{theme.eyebrow}</p>
+                  <h3>{theme.title}</h3>
+                  <p>{theme.preview}</p>
+                  <span className={styles.themeMeta}>{theme.periodLabel}</span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className={styles.timelineSection}>
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>Long arc</p>
+          <h2>A fast chronology before you dive into the detailed pages.</h2>
+        </div>
+        <div className={styles.timelineGrid}>
+          {siteTimeline.map((era) => (
+            <article key={era.era} className={styles.timelineCard}>
+              <p className={styles.timelineSpan}>{era.span}</p>
+              <h3>{era.era}</h3>
+              <p>{era.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.archiveSection}>
+        <div className={styles.sectionHeading}>
+          <p className={styles.sectionKicker}>Visual archive</p>
+          <h2>Selected visuals from across the atlas.</h2>
+        </div>
+        <div className={styles.archiveGrid}>
+          {archiveKeys.map((key) => {
+            const image = imageCatalog[key];
+
+            return (
+              <figure key={key} className={styles.archiveCard}>
+                <div className={styles.archiveImage}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 25vw"
+                  />
+                </div>
+                <figcaption>
+                  <strong>{image.creditLabel}</strong>
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }

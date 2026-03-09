@@ -1,0 +1,356 @@
+.page {
+  display: grid;
+  gap: 2.6rem;
+  padding-top: 1.2rem;
+}
+
+.hero,
+.introSection,
+.topicCard,
+.rhythmImageCard,
+.rhythmCopy,
+.timelineCard,
+.capabilityCard,
+.sourceItem {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.24);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.4rem;
+  padding: 1.5rem;
+  border-radius: 2.4rem;
+  background:
+    radial-gradient(circle at 18% 26%, rgba(47, 107, 99, 0.28), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(44, 79, 112, 0.26), transparent 34%),
+    rgba(9, 18, 26, 0.94);
+}
+
+.heroOrb {
+  position: relative;
+  min-height: 28rem;
+  display: grid;
+  place-items: center;
+}
+
+.heroImageWrap {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 30rem);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(223, 177, 92, 0.16);
+  border-radius: 50%;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+}
+
+.heroImageWrap :global(img) {
+  object-fit: cover;
+}
+
+.orbitRing,
+.orbitRingSecondary {
+  position: absolute;
+  border: 1px solid rgba(223, 177, 92, 0.18);
+  border-radius: 50%;
+}
+
+.orbitRing {
+  width: 88%;
+  height: 88%;
+}
+
+.orbitRingSecondary {
+  width: 68%;
+  height: 68%;
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: clamp(0.6rem, 1vw, 1rem);
+}
+
+.backLink,
+.eyebrow,
+.sectionKicker,
+.bandEyebrow {
+  font-size: 0.76rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(223, 177, 92, 0.82);
+}
+
+.heroCopy h1 {
+  font-size: clamp(3.4rem, 8vw, 6.1rem);
+  max-width: 9ch;
+}
+
+.subtitle {
+  max-width: 58ch;
+  font-size: 1.04rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.metricCard {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(223, 177, 92, 0.14);
+  border-radius: 1.2rem;
+  background: rgba(10, 19, 28, 0.7);
+}
+
+.metricCard span {
+  font-size: 0.82rem;
+  color: rgba(243, 236, 223, 0.64);
+}
+
+.metricCard strong {
+  color: #fff7eb;
+  font-size: 1.08rem;
+}
+
+.introSection,
+.topicDeckSection,
+.rhythmSection,
+.timelineSection,
+.capabilitySection,
+.sourceSection {
+  display: grid;
+  gap: 1rem;
+}
+
+.introSection {
+  padding: 1.4rem;
+  border-radius: 1.8rem;
+}
+
+.sectionHeading {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 68ch;
+}
+
+.sectionHeading h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.deckGrid,
+.topicDeck,
+.timelineGrid,
+.capabilityGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.deckGrid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.topicDeck {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.topicCard {
+  display: grid;
+  overflow: hidden;
+  border-radius: 1.45rem;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.topicCard:hover,
+.bandLink:hover {
+  transform: translateY(-2px);
+}
+
+.topicImage {
+  position: relative;
+  min-height: 220px;
+}
+
+.topicImage :global(img) {
+  object-fit: cover;
+}
+
+.topicBody {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.topicBody p {
+  color: rgba(223, 177, 92, 0.84);
+}
+
+.topicBody h3 {
+  font-size: 1.8rem;
+}
+
+.rhythmStack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.rhythmBand {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1.12fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.reverseBand {
+  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+}
+
+.reverseBand .rhythmImageCard {
+  order: 2;
+}
+
+.reverseBand .rhythmCopy {
+  order: 1;
+}
+
+.rhythmImageCard,
+.rhythmCopy {
+  border-radius: 1.8rem;
+  overflow: hidden;
+}
+
+.rhythmImage {
+  position: relative;
+  min-height: 420px;
+}
+
+.rhythmImage :global(img) {
+  object-fit: cover;
+}
+
+.rhythmImageCard figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1rem 1.1rem;
+}
+
+.rhythmImageCard a {
+  color: rgba(223, 177, 92, 0.88);
+}
+
+.rhythmCopy {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.5rem;
+}
+
+.rhythmCopy h3 {
+  font-size: clamp(2.1rem, 4vw, 3rem);
+}
+
+.bandList {
+  display: grid;
+  gap: 0.45rem;
+  padding-left: 1rem;
+}
+
+.bandLink {
+  width: fit-content;
+  padding: 0.78rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(47, 107, 99, 0.96), rgba(223, 177, 92, 0.92));
+  color: #091117;
+  font-weight: 700;
+  transition: transform 180ms ease;
+}
+
+.timelineGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.timelineCard,
+.capabilityCard {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.2rem;
+  border-radius: 1.45rem;
+}
+
+.timelineCard span {
+  color: rgba(223, 177, 92, 0.82);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.timelineCard h3,
+.capabilityCard h3 {
+  font-size: 1.8rem;
+}
+
+.capabilityGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sourceList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.sourceItem {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 1.2rem;
+}
+
+.sourceItem small {
+  color: rgba(243, 236, 223, 0.55);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1180px) {
+  .topicDeck,
+  .timelineGrid,
+  .capabilityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .rhythmBand,
+  .reverseBand,
+  .deckGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .reverseBand .rhythmImageCard,
+  .reverseBand .rhythmCopy {
+    order: initial;
+  }
+}
+
+@media (max-width: 720px) {
+  .topicDeck,
+  .timelineGrid,
+  .capabilityGrid,
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .rhythmImage {
+    min-height: 280px;
+  }
+}

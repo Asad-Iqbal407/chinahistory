@@ -1,0 +1,191 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.85fr);
+  gap: 1.35rem;
+}
+
+.mapFrame {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  border: 1px solid rgba(214, 178, 106, 0.18);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 22% 20%, rgba(195, 90, 43, 0.24), transparent 42%),
+    radial-gradient(circle at 78% 82%, rgba(47, 107, 99, 0.22), transparent 36%),
+    linear-gradient(180deg, rgba(10, 19, 28, 0.96), rgba(15, 27, 36, 0.88));
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.4);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+}
+
+.province {
+  fill: rgba(112, 142, 154, 0.54);
+  stroke: rgba(235, 230, 221, 0.27);
+  stroke-width: 0.8;
+  transition:
+    fill 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.storyProvince {
+  fill: rgba(223, 177, 92, 0.8);
+}
+
+.hoveredProvince {
+  fill: rgba(195, 90, 43, 0.95);
+}
+
+.hotspot {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f7efe2;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.hotspotDot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 2px solid rgba(255, 248, 238, 0.92);
+  border-radius: 999px;
+  background: rgba(195, 90, 43, 0.92);
+  box-shadow: 0 0 0 0 rgba(195, 90, 43, 0.6);
+  animation: pulse 2.4s infinite;
+}
+
+.hotspotLabel {
+  max-width: 13rem;
+  padding: 0.42rem 0.72rem;
+  border: 1px solid rgba(223, 177, 92, 0.24);
+  border-radius: 999px;
+  background: rgba(8, 14, 22, 0.72);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.activeHotspot .hotspotLabel {
+  background: rgba(195, 90, 43, 0.2);
+  border-color: rgba(223, 177, 92, 0.58);
+}
+
+.sidebar {
+  display: grid;
+  gap: 1rem;
+}
+
+.storyCard,
+.provinceCard {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.35rem;
+  border: 1px solid rgba(214, 178, 106, 0.15);
+  border-radius: 1.6rem;
+  background: rgba(12, 24, 34, 0.78);
+}
+
+.storyCard h3,
+.provinceCard h3 {
+  font-family: var(--font-display), serif;
+  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
+}
+
+.kicker {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: rgba(223, 177, 92, 0.74);
+}
+
+.locationLabel {
+  color: rgba(233, 226, 214, 0.7);
+}
+
+.themeLink {
+  width: fit-content;
+  margin-top: 0.1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(195, 90, 43, 0.94), rgba(223, 177, 92, 0.9));
+  color: #110e09;
+  font-weight: 700;
+}
+
+.storyList {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.storyButton {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(214, 178, 106, 0.12);
+  border-radius: 1.15rem;
+  background: rgba(12, 24, 34, 0.72);
+  color: rgba(247, 239, 226, 0.88);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.storyButton small {
+  color: rgba(233, 226, 214, 0.62);
+}
+
+.storyButton:hover,
+.storyButton:focus-visible,
+.storyButtonActive {
+  transform: translateX(4px);
+  border-color: rgba(223, 177, 92, 0.45);
+  background: rgba(195, 90, 43, 0.12);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(195, 90, 43, 0.65);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(195, 90, 43, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(195, 90, 43, 0);
+  }
+}
+
+@media (max-width: 980px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .mapFrame {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 720px) {
+  .mapFrame {
+    min-height: 430px;
+  }
+
+  .map {
+    padding: 1rem;
+  }
+
+  .hotspotLabel {
+    display: none;
+  }
+}
