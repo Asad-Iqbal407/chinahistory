@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 
 import { themeList } from "@/data/china-content";
 
@@ -59,6 +60,8 @@ function subscribeToThemePreference(onStoreChange: () => void) {
 }
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const themeMenuRef = useRef<HTMLDetailsElement>(null);
   const darkMode = useSyncExternalStore(
     subscribeToThemePreference,
     readDarkModePreference,
@@ -68,6 +71,12 @@ export function SiteHeader() {
   useEffect(() => {
     document.body.classList.toggle("simple-mode", !darkMode);
   }, [darkMode]);
+
+  useEffect(() => {
+    if (themeMenuRef.current) {
+      themeMenuRef.current.open = false;
+    }
+  }, [pathname]);
 
   const toggleMode = () => {
     const newMode = !darkMode;
@@ -91,19 +100,48 @@ export function SiteHeader() {
           <Link href="/historical-places" className={styles.link}>
             Historical Places
           </Link>
-          {themeList.map((theme) => (
-            <Link key={theme.slug} href={`/themes/${theme.slug}`} className={styles.link}>
-              {theme.navLabel}
-            </Link>
-          ))}
+          <Link href="/feedback" className={styles.link}>
+            Feedback
+          </Link>
+          <details
+            ref={themeMenuRef}
+            className={styles.themeMenu}
+          >
+            <summary className={styles.themeMenuToggle}>
+              Themes
+              <span className={styles.themeMenuChevron}>+</span>
+            </summary>
+            <div className={styles.themeMenuPanel}>
+              {themeList.map((theme) => (
+                <Link
+                  key={theme.slug}
+                  href={`/themes/${theme.slug}`}
+                  className={styles.themeMenuLink}
+                  onClick={() => {
+                    if (themeMenuRef.current) {
+                      themeMenuRef.current.open = false;
+                    }
+                  }}
+                >
+                  <span>{theme.navLabel}</span>
+                  <small>{theme.periodLabel}</small>
+                </Link>
+              ))}
+            </div>
+          </details>
         </nav>
-        <button 
-          onClick={toggleMode} 
-          className={styles.modeToggle}
-          aria-label="Toggle color theme"
-        >
-          Theme
-        </button>
+        <div className={styles.utilityNav}>
+          <Link href="/about" className={styles.utilityLink}>
+            About
+          </Link>
+          <button
+            onClick={toggleMode}
+            className={styles.modeToggle}
+            aria-label="Toggle color theme"
+          >
+            Theme
+          </button>
+        </div>
       </div>
     </header>
   );

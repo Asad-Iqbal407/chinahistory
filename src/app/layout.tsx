@@ -28,6 +28,7 @@ const cormorant = Cormorant_Garamond({
 
 const atlasLinks = [
   { href: "/", label: "Home Atlas" },
+  { href: "/about", label: "About" },
   { href: "/articles", label: "Articles" },
   { href: "/historical-places", label: "Historical Places" },
   { href: "/feedback", label: "Feedback" },

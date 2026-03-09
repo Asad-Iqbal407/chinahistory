@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const routes = [
     "/",
+    "/about",
     "/articles",
     "/historical-places",
     "/feedback",
@@ -42,6 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ? 1
         : route === "/historical-places"
           ? 0.9
+          : route === "/about"
+            ? 0.7
           : route === "/feedback"
             ? 0.6
           : segmentCount === 2

@@ -1,4 +1,5 @@
 :root {
+  --page-gutter: clamp(0.9rem, 2.4vw, 2rem);
   --bg: #08121a;
   --bg-soft: #10202a;
   --panel: rgba(11, 22, 31, 0.82);
@@ -16,12 +17,24 @@
   --header-bg: rgba(8, 18, 26, 0.75);
   --header-border: rgba(223, 177, 92, 0.1);
   --header-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --header-subline: rgba(243, 236, 223, 0.64);
+  --brand-mark-gradient: linear-gradient(135deg, #f5d890 0%, #dfb15c 40%, #c35a2b 100%);
+  --brand-mark-shadow: drop-shadow(0 2px 8px rgba(223, 177, 92, 0.3));
   --nav-bg: rgba(8, 16, 23, 0.55);
   --nav-text: rgba(241, 236, 226, 0.86);
   --nav-border: rgba(223, 177, 92, 0.25);
   --nav-hover-bg: rgba(195, 90, 43, 0.25);
   --nav-hover-border: rgba(223, 177, 92, 0.65);
   --nav-hover-text: rgba(255, 248, 238, 1);
+  --nav-hover-shadow: 0 4px 20px rgba(195, 90, 43, 0.25);
+  --footer-bg: linear-gradient(180deg, rgba(9, 18, 26, 0.96) 0%, rgba(8, 16, 23, 0.98) 100%);
+  --footer-border: rgba(223, 177, 92, 0.18);
+  --footer-text: rgba(243, 236, 223, 0.7);
+  --footer-muted: rgba(243, 236, 223, 0.5);
+  --footer-heading: #dfb15c;
+  --footer-logo-gradient: linear-gradient(135deg, #f5d890 0%, #dfb15c 40%, #c35a2b 100%);
+  --footer-shadow: 0 -18px 48px rgba(0, 0, 0, 0.24);
+  --footer-divider: rgba(223, 177, 92, 0.1);
   
   /* Enhanced heading colors */
   --heading-gold: linear-gradient(135deg, #f5d890 0%, #dfb15c 40%, #c9a14a 100%);
@@ -33,6 +46,22 @@
   --glow-gold: 0 0 30px rgba(223, 177, 92, 0.25);
   --glow-rust: 0 0 30px rgba(195, 90, 43, 0.25);
   --glow-jade: 0 0 30px rgba(47, 107, 99, 0.25);
+  --glow-blue: 0 24px 70px rgba(4, 9, 14, 0.28), 0 0 35px rgba(223, 177, 92, 0.08);
+
+  /* Blue theme panels */
+  --panel-blue: rgba(11, 22, 31, 0.82);
+  --panel-blue-strong: rgba(9, 18, 26, 0.94);
+  --panel-blue-border: rgba(223, 177, 92, 0.18);
+  --text-on-blue: #fff7eb;
+  --text-on-blue-medium: rgba(243, 236, 223, 0.72);
+  --text-on-blue-soft: #dfb15c;
+  --surface-card-bg: rgba(11, 22, 31, 0.82);
+  --surface-card-border: rgba(223, 177, 92, 0.18);
+  --surface-card-shadow: 0 24px 70px rgba(4, 9, 14, 0.28), 0 0 40px rgba(223, 177, 92, 0.05);
+  --surface-card-shadow-soft: 0 10px 40px rgba(4, 9, 14, 0.22), 0 0 24px rgba(223, 177, 92, 0.04);
+  --surface-card-hover-shadow: 0 20px 60px rgba(4, 9, 14, 0.4), 0 0 40px rgba(223, 177, 92, 0.12);
+  --hero-title-gradient: linear-gradient(135deg, #fff8e7 0%, #f5d890 30%, #dfb15c 60%, #c9a14a 100%);
+  --hero-title-shadow: drop-shadow(0 2px 8px rgba(223, 177, 92, 0.25));
 }
 
 html,
@@ -120,19 +149,23 @@ select {
 
 .site-shell {
   min-height: 100vh;
+  width: 100%;
 }
 
 .site-main {
-  width: min(1180px, calc(100vw - 2rem));
-  margin: 0 auto;
-  padding-bottom: 4rem;
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--page-gutter) 4rem;
 }
 
 .site-footer {
-  width: min(1180px, calc(100vw - 2rem));
-  margin: 0 auto;
-  padding: 3rem 0 3.5rem;
-  border-top: 1px solid var(--line);
+  width: 100%;
+  margin: 0;
+  padding: 4rem var(--page-gutter);
+  border-top: 1px solid var(--footer-border);
+  background: var(--footer-bg);
+  border-radius: clamp(1.25rem, 2.8vw, 2rem) clamp(1.25rem, 2.8vw, 2rem) 0 0;
+  box-shadow: var(--footer-shadow);
   display: grid;
   gap: 2rem;
   grid-template-columns: 1fr auto;
@@ -151,7 +184,7 @@ select {
   font-family: var(--font-display), serif;
   font-size: 1.25rem;
   font-weight: 600;
-  background: linear-gradient(135deg, #f5d890 0%, #dfb15c 40%, #c35a2b 100%);
+  background: var(--footer-logo-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -159,7 +192,7 @@ select {
 
 .footer-tagline {
   font-size: 0.9rem;
-  color: rgba(243, 236, 223, 0.6);
+  color: var(--footer-text);
   max-width: 30ch;
 }
 
@@ -179,29 +212,29 @@ select {
   font-family: var(--font-display), serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--gold);
+  color: var(--footer-heading);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   background: none;
-  -webkit-text-fill-color: var(--gold);
+  -webkit-text-fill-color: var(--footer-heading);
 }
 
 .footer-col a {
   font-size: 0.9rem;
-  color: rgba(243, 236, 223, 0.7);
+  color: var(--footer-text);
   transition: color 180ms ease;
 }
 
 .footer-col a:hover {
-  color: var(--gold);
+  color: #ffffff;
 }
 
 .footer-bottom {
   grid-area: bottom;
   font-size: 0.85rem;
-  color: rgba(243, 236, 223, 0.5);
+  color: var(--footer-muted);
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(223, 177, 92, 0.1);
+  border-top: 1px solid var(--footer-divider);
 }
 
 ::selection {
@@ -210,17 +243,27 @@ select {
 }
 
 @media (max-width: 780px) {
-  .site-main,
-  .site-footer {
-    width: min(1180px, calc(100vw - 1rem));
+  :root {
+    --page-gutter: 0.85rem;
+  }
+
+  .site-main {
+    padding-bottom: 3rem;
   }
   
   .site-footer {
+    padding-top: 2.75rem;
+    padding-bottom: 2.5rem;
+    gap: 1.5rem;
     grid-template-columns: 1fr;
     grid-template-areas: 
       "brand"
       "links"
       "bottom";
+  }
+
+  .footer-tagline {
+    max-width: none;
   }
   
   .footer-links {
@@ -242,15 +285,41 @@ body.simple-mode {
   --text-faint: rgba(24, 35, 45, 0.48);
   --line: rgba(24, 35, 45, 0.12);
   --chip-bg: rgba(244, 239, 231, 0.96);
-  --header-bg: rgba(255, 255, 255, 0.88);
-  --header-border: rgba(24, 35, 45, 0.08);
-  --header-shadow: 0 8px 28px rgba(17, 25, 34, 0.08);
-  --nav-bg: rgba(255, 255, 255, 0.95);
-  --nav-text: rgba(24, 35, 45, 0.82);
-  --nav-border: rgba(24, 35, 45, 0.12);
-  --nav-hover-bg: rgba(44, 79, 112, 0.1);
-  --nav-hover-border: rgba(44, 79, 112, 0.24);
-  --nav-hover-text: #17324b;
+  --header-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.96), rgba(29, 78, 216, 0.95));
+  --header-border: rgba(191, 219, 254, 0.48);
+  --header-shadow: 0 14px 34px rgba(37, 99, 235, 0.18);
+  --header-subline: rgba(219, 234, 254, 0.86);
+  --brand-mark-gradient: linear-gradient(135deg, #ffffff 0%, #dbeafe 38%, #93c5fd 100%);
+  --brand-mark-shadow: drop-shadow(0 2px 10px rgba(30, 64, 175, 0.25));
+  --nav-bg: rgba(255, 255, 255, 0.14);
+  --nav-text: #eff6ff;
+  --nav-border: rgba(219, 234, 254, 0.34);
+  --nav-hover-bg: rgba(255, 255, 255, 0.22);
+  --nav-hover-border: rgba(255, 255, 255, 0.48);
+  --nav-hover-text: #ffffff;
+  --nav-hover-shadow: 0 10px 24px rgba(30, 64, 175, 0.22);
+  --footer-bg: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  --footer-border: rgba(147, 197, 253, 0.55);
+  --footer-text: #eff6ff;
+  --footer-muted: rgba(219, 234, 254, 0.82);
+  --footer-heading: #dbeafe;
+  --footer-logo-gradient: linear-gradient(135deg, #ffffff 0%, #eff6ff 42%, #bfdbfe 100%);
+  --footer-shadow: 0 -18px 48px rgba(30, 64, 175, 0.14);
+  --footer-divider: rgba(219, 234, 254, 0.18);
+  --glow-blue: 0 0 35px rgba(59, 130, 246, 0.4);
+  --panel-blue: #eff6ff;
+  --panel-blue-strong: #dbeafe;
+  --panel-blue-border: #bfdbfe;
+  --text-on-blue: #1e3a8a;
+  --text-on-blue-medium: #475569;
+  --text-on-blue-soft: #3b82f6;
+  --surface-card-bg: #ffffff;
+  --surface-card-border: #bfdbfe;
+  --surface-card-shadow: 0 8px 30px rgba(59, 130, 246, 0.06);
+  --surface-card-shadow-soft: 0 10px 40px rgba(59, 130, 246, 0.08);
+  --surface-card-hover-shadow: 0 15px 45px rgba(59, 130, 246, 0.1);
+  --hero-title-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%);
+  --hero-title-shadow: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.1));
   background:
     radial-gradient(circle at 12% 8%, rgba(44, 79, 112, 0.08) 0%, transparent 32%),
     radial-gradient(circle at 88% 5%, rgba(47, 107, 99, 0.08) 0%, transparent 28%),
@@ -274,48 +343,6 @@ body.simple-mode h4 {
 body.simple-mode p,
 body.simple-mode li {
   color: var(--text-soft);
-}
-
-body.simple-mode .brandMark {
-  background: none;
-  -webkit-text-fill-color: #1a1a1a;
-  filter: none;
-}
-
-body.simple-mode .brandSubline {
-  color: var(--text-muted);
-}
-
-body.simple-mode .footer-logo {
-  background: none;
-  -webkit-text-fill-color: #1a1a1a;
-  filter: none;
-}
-
-body.simple-mode .footer-tagline {
-  color: var(--text-muted);
-}
-
-body.simple-mode .footer-col h4 {
-  color: var(--text);
-}
-
-body.simple-mode .footer-col a {
-  color: var(--text-soft);
-}
-
-body.simple-mode .footer-col a:hover {
-  color: var(--text);
-}
-
-body.simple-mode .footer-bottom {
-  color: var(--text-faint);
-}
-
-body.simple-mode .site-footer {
-  background: transparent;
-  box-shadow: none;
-  border-top-color: var(--line);
 }
 
 body.simple-mode .eyebrow,
