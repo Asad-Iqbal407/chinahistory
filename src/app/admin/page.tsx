@@ -3,13 +3,11 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { AdminFeedbackInbox } from "@/components/admin-feedback-inbox";
-import { AdminLogoutButton } from "@/components/admin-logout-button";
 import { getAdminSession } from "@/lib/admin-auth";
 import {
   ensureCmsCollections,
   listAdminArticles,
   listFeedbackEntries,
-  listPublicArticles,
 } from "@/lib/cms";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -37,9 +35,8 @@ export default async function AdminDashboardPage() {
 
   await ensureCmsCollections();
 
-  const [adminArticles, publicArticles, feedbackEntries] = await Promise.all([
+  const [adminArticles, feedbackEntries] = await Promise.all([
     listAdminArticles(),
-    listPublicArticles(),
     listFeedbackEntries(),
   ]);
 
@@ -50,147 +47,136 @@ export default async function AdminDashboardPage() {
   const recentArticles = adminArticles.slice(0, 6);
 
   return (
-    <section className={styles.page}>
-      <div className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>Private publishing room</p>
-          <h1>Write, publish, and respond from one admin workspace.</h1>
-          <p>
-            Signed in as {session.email}. Mongo-backed posts go live in the article archive, and
-            public feedback lands here as an inbox instead of getting lost.
+    <div className={styles.dashboard}>
+      <header className={styles.header}>
+        <div>
+          <h1 className={styles.title}>Overview</h1>
+          <p className={styles.subtitle}>
+            Welcome back, {session.email.split("@")[0]}. Here is what is happening with
+            China Atlas.
           </p>
-          <div className={styles.heroRibbon}>
-            <span>Hidden from public navigation</span>
-            <span>Mongo-backed publishing</span>
-            <span>Reader feedback inbox</span>
+        </div>
+        <div className={styles.actions}>
+          <Link href="/admin/articles/new" className={styles.primaryAction}>
+            <span className={styles.icon}>+</span> Create New Article
+          </Link>
+        </div>
+      </header>
+
+      <div className={styles.statsGrid}>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statIcon}>AR</span>
+            <span className={styles.statLabel}>Total Articles</span>
           </div>
+          <div className={styles.statValue}>{adminArticles.length}</div>
+          <p className={styles.statDesc}>Managed in MongoDB Atlas</p>
         </div>
-        <div className={styles.heroActions}>
-          <Link href="/admin/articles/new" className={styles.primaryLink}>
-            New article
-          </Link>
-          <Link href="/articles" className={styles.secondaryLink}>
-            View public archive
-          </Link>
-          <AdminLogoutButton className={styles.logoutButton} />
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statIcon}>OK</span>
+            <span className={styles.statLabel}>Published</span>
+          </div>
+          <div className={styles.statValue}>{publishedCount}</div>
+          <p className={styles.statDesc}>Live on the public site</p>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span className={styles.statIcon}>DR</span>
+            <span className={styles.statLabel}>Drafts</span>
+          </div>
+          <div className={styles.statValue}>{draftCount}</div>
+          <p className={styles.statDesc}>Currently in progress</p>
+        </div>
+        <div className={styles.statCard}>
+          <div className={styles.statHeader}>
+            <span
+              className={`${styles.statIcon} ${newFeedbackCount > 0 ? styles.hasNew : ""}`}
+            >
+              FB
+            </span>
+            <span className={styles.statLabel}>Feedback</span>
+          </div>
+          <div className={styles.statValue}>{feedbackCount}</div>
+          <p className={styles.statDesc}>{newFeedbackCount} new submissions</p>
         </div>
       </div>
 
-      <div className={styles.stats}>
-        <article className={styles.statCard}>
-          <span>Mongo articles</span>
-          <strong>{adminArticles.length}</strong>
-          <p>All drafts and published posts stored in Atlas.</p>
-        </article>
-        <article className={styles.statCard}>
-          <span>Published</span>
-          <strong>{publishedCount}</strong>
-          <p>Live public posts merged into the archive immediately.</p>
-        </article>
-        <article className={styles.statCard}>
-          <span>Drafts</span>
-          <strong>{draftCount}</strong>
-          <p>Posts still being shaped before public release.</p>
-        </article>
-        <article className={styles.statCard}>
-          <span>Feedback inbox</span>
-          <strong>{feedbackCount}</strong>
-          <p>{newFeedbackCount} still marked new.</p>
-        </article>
-        <article className={styles.statCard}>
-          <span>Total public archive</span>
-          <strong>{publicArticles.length}</strong>
-          <p>Static atlas essays plus published Mongo articles.</p>
-        </article>
-      </div>
-
-      <div className={styles.contentGrid}>
-        <section className={styles.section}>
+      <div className={styles.mainGrid}>
+        <section className={styles.recentSection}>
           <div className={styles.sectionHeader}>
-            <div>
-              <h2>Publishing system</h2>
-              <p>Use this as the writing queue for new articles and revisions.</p>
-            </div>
-            <Link href="/admin/articles/new" className={styles.secondaryLink}>
-              Create article
+            <h2>Recent Articles</h2>
+            <Link href="/articles" className={styles.viewAll} target="_blank">
+              View Public Archive
             </Link>
           </div>
-          <div className={styles.workflowGrid}>
-            <article className={styles.workflowCard}>
-              <span className={styles.workflowStep}>1</span>
-              <h3>Draft</h3>
-              <p>Write the structure, choose atlas visuals, and set internal backlinks.</p>
-            </article>
-            <article className={styles.workflowCard}>
-              <span className={styles.workflowStep}>2</span>
-              <h3>Review</h3>
-              <p>Check slug clarity, article angle, and whether the page fits the archive.</p>
-            </article>
-            <article className={styles.workflowCard}>
-              <span className={styles.workflowStep}>3</span>
-              <h3>Publish</h3>
-              <p>The post appears in `/articles` without needing a rebuild or code edit.</p>
-            </article>
-          </div>
+
+          {recentArticles.length === 0 ? (
+            <div className={styles.emptyState}>
+              <p>No articles found. Start by creating your first draft.</p>
+              <Link href="/admin/articles/new" className={styles.secondaryAction}>
+                Create Article
+              </Link>
+            </div>
+          ) : (
+            <div className={styles.articleTableWrapper}>
+              <table className={styles.articleTable}>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentArticles.map((article) => (
+                    <tr key={article.id}>
+                      <td>
+                        <div className={styles.articleTitleCell}>
+                          <span className={styles.articleTitle}>{article.title}</span>
+                          <span className={styles.articleSlug}>/{article.slug}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className={`${styles.statusBadge} ${styles[article.status]}`}>
+                          {article.status}
+                        </span>
+                      </td>
+                      <td>{new Date(article.updatedAt).toLocaleDateString()}</td>
+                      <td>
+                        <div className={styles.tableActions}>
+                          <Link href={`/admin/articles/${article.id}`} className={styles.editBtn}>
+                            Edit
+                          </Link>
+                          {article.status === "published" ? (
+                            <Link
+                              href={`/articles/${article.slug}`}
+                              className={styles.viewBtn}
+                              target="_blank"
+                            >
+                              View
+                            </Link>
+                          ) : null}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </section>
 
-        <section className={styles.section}>
+        <section className={styles.feedbackSection}>
           <div className={styles.sectionHeader}>
-            <div>
-              <h2>Feedback inbox</h2>
-              <p>Reader comments, corrections, and ideas land here.</p>
-            </div>
-            <Link href="/feedback" className={styles.secondaryLink}>
-              Open public form
-            </Link>
+            <h2>Recent Feedback</h2>
           </div>
-          <AdminFeedbackInbox initialEntries={feedbackEntries} />
+          <div className={styles.feedbackListWrapper}>
+            <AdminFeedbackInbox initialEntries={feedbackEntries.slice(0, 10)} />
+          </div>
         </section>
       </div>
-
-      <section className={styles.section}>
-        <div className={styles.sectionHeader}>
-          <div>
-            <h2>Recent article library</h2>
-            <p>Drafts stay private. Published posts appear immediately in the public archive.</p>
-          </div>
-          <Link href="/articles" className={styles.secondaryLink}>
-            View archive
-          </Link>
-        </div>
-        {recentArticles.length === 0 ? (
-          <p className={styles.emptyState}>
-            No Mongo articles yet. Create the first draft to start publishing from the admin panel.
-          </p>
-        ) : (
-          <div className={styles.articleList}>
-            {recentArticles.map((article) => (
-              <article key={article.id} className={styles.articleCard}>
-                <div className={styles.articleTopline}>
-                  <span className={styles.articleStatus}>{article.status}</span>
-                  <span className={styles.articleSlug}>/articles/{article.slug}</span>
-                </div>
-                <h3>{article.title}</h3>
-                <p>{article.excerpt}</p>
-                <div className={styles.articleMeta}>
-                  <span>Updated {new Date(article.updatedAt).toLocaleString()}</span>
-                  <span>{article.readingTime}</span>
-                </div>
-                <div className={styles.articleActions}>
-                  <Link href={`/admin/articles/${article.id}`} className={styles.secondaryLink}>
-                    Edit
-                  </Link>
-                  {article.status === "published" ? (
-                    <Link href={`/articles/${article.slug}`} className={styles.secondaryLink}>
-                      Open public page
-                    </Link>
-                  ) : null}
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
-      </section>
-    </section>
+    </div>
   );
 }

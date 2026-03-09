@@ -27,6 +27,7 @@ export function AdminLogoutButton({ className }: AdminLogoutButtonProps) {
 
   return (
     <button type="button" onClick={handleClick} className={className} disabled={pending}>
+      <span style={{ fontSize: '1.1rem', marginRight: '0.75rem' }}>🚪</span>
       {pending ? "Signing out..." : "Sign out"}
     </button>
   );

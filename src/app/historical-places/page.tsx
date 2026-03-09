@@ -118,103 +118,103 @@ export default function HistoricalPlacesPage() {
           </div>
         </section>
 
-      <section className={styles.introSection}>
-        <div className={styles.sectionHeading}>
-          <p className={styles.sectionKicker}>How to read this page</p>
-          <h2>Use it as a fast historical guide to places that carry the largest weight in Chinese memory.</h2>
-        </div>
-        <div className={styles.introGrid}>
-          <p>
-            This page is a curated list rather than an exhaustive catalog. It brings
-            together places that matter for origins, empire, trade, religion, war, and
-            modern transformation.
-          </p>
-          <p>
-            Some are surviving monuments, some are cities layered with several pasts,
-            and some are memory sites that became important because major turning points
-            happened there.
-          </p>
-        </div>
-      </section>
+        <section className={styles.introSection}>
+          <div className={styles.sectionHeading}>
+            <p className={styles.sectionKicker}>How to read this page</p>
+            <h2>Use it as a fast historical guide to places that carry the largest weight in Chinese memory.</h2>
+          </div>
+          <div className={styles.introGrid}>
+            <p>
+              This page is a curated list rather than an exhaustive catalog. It brings
+              together places that matter for origins, empire, trade, religion, war, and
+              modern transformation.
+            </p>
+            <p>
+              Some are surviving monuments, some are cities layered with several pasts,
+              and some are memory sites that became important because major turning points
+              happened there.
+            </p>
+          </div>
+        </section>
 
-      {historicalPlaceGroups.map((group, index) => {
-        const image = imageCatalog[group.image];
+        {historicalPlaceGroups.map((group, index) => {
+          const image = imageCatalog[group.image];
 
-        return (
-          <section key={group.slug} className={styles.groupSection}>
-            <div
-              className={[
-                styles.groupIntro,
-                index % 2 === 1 ? styles.groupIntroReverse : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              <div className={styles.groupImage}>
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 38vw"
-                />
+          return (
+            <section key={group.slug} className={styles.groupSection}>
+              <div
+                className={[
+                  styles.groupIntro,
+                  index % 2 === 1 ? styles.groupIntroReverse : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <div className={styles.groupImage}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 900px) 100vw, 38vw"
+                  />
+                </div>
+                <div className={styles.groupCopy}>
+                  <p className={styles.sectionKicker}>Historical places</p>
+                  <h2>{group.title}</h2>
+                  <p>{group.subtitle}</p>
+                </div>
               </div>
-              <div className={styles.groupCopy}>
-                <p className={styles.sectionKicker}>Historical places</p>
-                <h2>{group.title}</h2>
-                <p>{group.subtitle}</p>
-              </div>
-            </div>
 
-            <div className={styles.placeGrid}>
-              {group.places.map((place) => (
-                <article
-                  key={place.name}
-                  id={toAnchor(`${group.slug}-${place.name}`)}
-                  className={styles.placeCard}
-                >
-                  <div className={styles.placeImage}>
-                    <Image
-                      src={imageCatalog[place.image].src}
-                      alt={imageCatalog[place.image].alt}
-                      fill
-                      sizes="(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className={styles.placeBody}>
-                    <div className={styles.placeMeta}>
-                      <span>{place.location}</span>
-                      <span>{place.period}</span>
+              <div className={styles.placeGrid}>
+                {group.places.map((place) => (
+                  <article
+                    key={place.name}
+                    id={toAnchor(`${group.slug}-${place.name}`)}
+                    className={styles.placeCard}
+                  >
+                    <div className={styles.placeImage}>
+                      <Image
+                        src={imageCatalog[place.image].src}
+                        alt={imageCatalog[place.image].alt}
+                        fill
+                        sizes="(max-width: 760px) 100vw, (max-width: 1180px) 50vw, 33vw"
+                      />
                     </div>
-                    <h3>{place.name}</h3>
-                    <p>{place.description}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        );
-      })}
+                    <div className={styles.placeBody}>
+                      <div className={styles.placeMeta}>
+                        <span>{place.location}</span>
+                        <span>{place.period}</span>
+                      </div>
+                      <h3>{place.name}</h3>
+                      <p>{place.description}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          );
+        })}
 
-      <section className={styles.relatedSection}>
-        <div className={styles.sectionHeading}>
-          <p className={styles.sectionKicker}>Continue exploring</p>
-          <h2>Move from places to the larger stories they belong to.</h2>
-        </div>
-        <div className={styles.relatedGrid}>
-          <Link href="/themes/civilization" className={styles.relatedCard}>
-            <span>Civilization</span>
-            <h3>Origins, writing, belief, and long cultural continuities.</h3>
-          </Link>
-          <Link href="/themes/dynasties" className={styles.relatedCard}>
-            <span>Dynasties</span>
-            <h3>Capitals, courts, and the political sequence of empire.</h3>
-          </Link>
-          <Link href="/themes/wars-and-revolutions" className={styles.relatedCard}>
-            <span>Wars</span>
-            <h3>Sites of invasion, resistance, rebellion, and revolutionary change.</h3>
-          </Link>
-        </div>
-      </section>
+        <section className={styles.relatedSection}>
+          <div className={styles.sectionHeading}>
+            <p className={styles.sectionKicker}>Continue exploring</p>
+            <h2>Move from geography to long-term history themes.</h2>
+          </div>
+          <div className={styles.relatedGrid}>
+            <Link href="/articles" className={styles.relatedCard}>
+              <h3>Featured Articles</h3>
+              <p>Deep dives into specific historical questions and city essays.</p>
+            </Link>
+            <Link href="/themes/civilization" className={styles.relatedCard}>
+              <h3>Civilization Themes</h3>
+              <p>Explore the long arc of Chinese culture, belief, and statehood.</p>
+            </Link>
+            <Link href="/" className={styles.relatedCard}>
+              <h3>Interactive Map</h3>
+              <p>Navigate the atlas through provinces and historical corridors.</p>
+            </Link>
+          </div>
+        </section>
       </article>
     </>
   );

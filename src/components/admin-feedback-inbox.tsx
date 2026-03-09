@@ -96,37 +96,37 @@ export function AdminFeedbackInbox({ initialEntries }: AdminFeedbackInboxProps) 
               <div className={styles.meta}>
                 {entry.email ? <span>{entry.email}</span> : null}
                 <span>{entry.pagePath}</span>
-                <span>{new Date(entry.createdAt).toLocaleString()}</span>
+                <span>{new Date(entry.createdAt).toLocaleDateString()}</span>
               </div>
             </div>
+            
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={[
+                  styles.button,
+                  entry.status === "reviewed" ? styles.buttonActive : "",
+                ].join(" ")}
+                onClick={() => updateStatus(entry.id, "reviewed")}
+                disabled={pendingId === entry.id || entry.status === "reviewed"}
+              >
+                {pendingId === entry.id ? "..." : "Reviewed"}
+              </button>
+              <button
+                type="button"
+                className={[
+                  styles.button,
+                  entry.status === "archived" ? styles.buttonActive : "",
+                ].join(" ")}
+                onClick={() => updateStatus(entry.id, "archived")}
+                disabled={pendingId === entry.id || entry.status === "archived"}
+              >
+                {pendingId === entry.id ? "..." : "Archive"}
+              </button>
+            </div>
           </div>
+          
           <p className={styles.message}>{entry.message}</p>
-          <div className={styles.actions}>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={() => updateStatus(entry.id, "reviewed")}
-              disabled={pendingId === entry.id || entry.status === "reviewed"}
-            >
-              {pendingId === entry.id ? "Updating..." : "Mark reviewed"}
-            </button>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={() => updateStatus(entry.id, "archived")}
-              disabled={pendingId === entry.id || entry.status === "archived"}
-            >
-              Archive
-            </button>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={() => updateStatus(entry.id, "new")}
-              disabled={pendingId === entry.id || entry.status === "new"}
-            >
-              Reopen
-            </button>
-          </div>
         </article>
       ))}
     </div>

@@ -1,115 +1,147 @@
 .stack {
-  display: grid;
-  gap: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.empty {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
 }
 
 .error {
   margin: 0;
-  border-radius: 18px;
-  padding: 0.95rem 1rem;
-  background: color-mix(in srgb, #b12424 12%, var(--surface-base));
-  color: #851919;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  background: #fff1f0;
+  border: 1px solid #ffa39e;
+  color: #cf1322;
+  font-size: 0.875rem;
 }
 
 .card {
   border: 1px solid var(--line-soft);
-  border-radius: 24px;
-  padding: 1rem 1.1rem;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--surface-base) 82%, #fff), var(--surface-base));
+  border-radius: 16px;
+  padding: 1.25rem;
+  background: var(--surface-base);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--line-soft));
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .cardNew {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line-soft));
-  box-shadow: 0 18px 40px rgba(18, 23, 34, 0.08);
+  border-left: 4px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 2%, var(--surface-base));
 }
 
 .topline {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
   align-items: flex-start;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .titleBlock {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.25rem;
 }
 
 .titleBlock h3 {
   margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .meta {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.kindBadge,
-.statusBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  border-radius: 999px;
-  padding: 0.35rem 0.7rem;
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 0.8rem;
 }
 
 .kindBadge {
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface-base));
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface-base));
   color: var(--accent);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.statusBadge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.7rem;
 }
 
 .statusNew {
-  background: color-mix(in srgb, var(--accent) 14%, var(--surface-base));
-  color: var(--accent);
+  background: #fff7e6;
+  color: #fa8c16;
 }
 
 .statusReviewed {
-  background: color-mix(in srgb, #235ea6 12%, var(--surface-base));
-  color: #24528a;
+  background: #e6f7ff;
+  color: #1890ff;
 }
 
 .statusArchived {
-  background: color-mix(in srgb, #677487 12%, var(--surface-base));
-  color: #596474;
+  background: #f5f5f5;
+  color: #8c8c8c;
 }
 
 .message {
-  margin: 0 0 0.8rem;
-  line-height: 1.7;
+  margin: 0 0 1.25rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--text-primary);
+  background: var(--surface-strong);
+  padding: 0.75rem;
+  border-radius: 8px;
   white-space: pre-wrap;
 }
 
 .actions {
   display: flex;
-  gap: 0.7rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .button {
-  border: 1px solid var(--line-soft);
-  border-radius: 999px;
-  padding: 0.7rem 1rem;
-  background: transparent;
-  color: var(--text-primary);
-  font: inherit;
-  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--line-soft);
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--line-soft);
 }
 
 .button:disabled {
-  opacity: 0.72;
-  cursor: wait;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.empty {
-  margin: 0;
-  color: var(--text-muted);
+.buttonActive {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.buttonActive:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 85%, black);
 }

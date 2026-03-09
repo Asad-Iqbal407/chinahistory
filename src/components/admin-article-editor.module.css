@@ -1,68 +1,72 @@
 .editor {
-  display: grid;
-  gap: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .topbar {
   position: sticky;
-  top: 1rem;
-  z-index: 20;
+  top: 90px; /* Below the topBar */
+  z-index: 80;
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
   align-items: center;
-  padding: 1.25rem 1.35rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line-soft));
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 16%, transparent), transparent 40%),
-    color-mix(in srgb, var(--surface-strong) 92%, white);
-  box-shadow: 0 18px 42px rgba(18, 23, 34, 0.1);
-  backdrop-filter: blur(10px);
+  gap: 1.5rem;
+  padding: 1.25rem 2rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
 }
 
 .topbar h1 {
-  margin: 0 0 0.45rem;
+  margin: 0;
+  font-size: 1.5rem;
+  font-family: var(--font-display);
 }
 
 .statusMeta {
   display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  gap: 1rem;
   color: var(--text-muted);
-  font-size: 0.92rem;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
 }
 
 .panel {
+  background: var(--surface-strong);
   border: 1px solid var(--line-soft);
-  border-radius: 30px;
-  padding: 1.35rem;
-  background:
-    radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 7%, transparent), transparent 45%),
-    var(--surface-strong);
-  box-shadow: var(--shadow-soft);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
 }
 
-.panel h2,
-.panel h3 {
-  margin: 0 0 0.55rem;
+.panel h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
 }
 
 .panel p {
   margin: 0;
   color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .field {
-  display: grid;
-  gap: 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .fieldWide {
@@ -70,8 +74,8 @@
 }
 
 .field label {
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
@@ -79,153 +83,205 @@
 .field select,
 .field textarea {
   width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
   border: 1px solid var(--line-soft);
-  border-radius: 18px;
-  padding: 0.95rem 1rem;
-  background: color-mix(in srgb, var(--surface-base) 88%, white);
+  background: var(--surface-base);
   color: var(--text-primary);
   font: inherit;
-}
-
-.field textarea {
-  min-height: 150px;
-  resize: vertical;
+  transition: all 0.2s ease;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  outline-offset: 2px;
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.field textarea {
+  min-height: 120px;
+  line-height: 1.6;
 }
 
 .helper {
+  font-size: 0.8rem;
   color: var(--text-muted);
-  font-size: 0.84rem;
 }
 
 .checkboxGrid {
   display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
 .checkboxCard {
-  display: grid;
-  gap: 0.4rem;
-  padding: 0.95rem 1rem;
+  padding: 1rem;
   border: 1px solid var(--line-soft);
-  border-radius: 20px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 6%, var(--surface-base)), var(--surface-base));
+  border-radius: 12px;
+  background: var(--surface-base);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkboxCard:hover {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--line-soft));
 }
 
 .checkboxRow {
   display: flex;
-  gap: 0.7rem;
+  gap: 0.75rem;
   align-items: flex-start;
 }
 
 .checkboxRow input {
+  width: auto;
   margin-top: 0.25rem;
 }
 
+.checkboxLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checkboxTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 .checkboxSlug {
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .sectionCard {
-  display: grid;
-  gap: 1rem;
-  padding: 1rem;
+  background: var(--surface-base);
   border: 1px solid var(--line-soft);
-  border-radius: 24px;
-  background: color-mix(in srgb, var(--surface-base) 92%, white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .sectionHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
 }
 
 .sectionHeader h3 {
   margin: 0;
+  font-size: 1.1rem;
 }
 
-.subActions,
 .actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  align-items: center;
+  gap: 1rem;
 }
 
-.ghostButton,
-.dangerButton,
+.primaryButton,
 .secondaryButton,
-.primaryButton {
-  border: none;
-  border-radius: 999px;
-  padding: 0.88rem 1.2rem;
-  font: inherit;
-  font-weight: 700;
+.dangerButton,
+.ghostButton {
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
 }
 
 .primaryButton {
-  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #f0d17c));
-  color: #fffaf1;
+  background: var(--accent);
+  color: white;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 85%, black);
+  transform: translateY(-1px);
 }
 
 .secondaryButton {
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface-base));
-  color: var(--text-primary);
-}
-
-.ghostButton {
-  background: transparent;
+  background: var(--surface-base);
   color: var(--text-primary);
   border: 1px solid var(--line-soft);
 }
 
+.secondaryButton:hover:not(:disabled) {
+  background: var(--line-soft);
+}
+
 .dangerButton {
-  background: color-mix(in srgb, #a61d1d 16%, var(--surface-base));
-  color: #8f1d1d;
+  background: #fff1f0;
+  color: #cf1322;
+  border: 1px solid #ffa39e;
+}
+
+.dangerButton:hover:not(:disabled) {
+  background: #ffccc7;
+}
+
+.ghostButton {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+}
+
+.ghostButton:hover:not(:disabled) {
+  color: var(--text-primary);
+  background: var(--line-soft);
 }
 
 .primaryButton:disabled,
 .secondaryButton:disabled,
-.ghostButton:disabled,
-.dangerButton:disabled {
-  opacity: 0.72;
-  cursor: wait;
+.dangerButton:disabled,
+.ghostButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.message,
-.error {
-  margin: 0;
-  border-radius: 18px;
-  padding: 1rem 1.1rem;
+.messageBanner,
+.errorBanner {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.message {
-  background: color-mix(in srgb, #236635 12%, var(--surface-base));
-  color: #1f5c30;
+.messageBanner {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  color: #389e0d;
 }
 
-.error {
-  background: color-mix(in srgb, #b12424 12%, var(--surface-base));
-  color: #851919;
+.errorBanner {
+  background: #fff1f0;
+  border: 1px solid #ffa39e;
+  color: #cf1322;
 }
 
-@media (max-width: 900px) {
+.sectionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 768px) {
   .topbar {
-    position: static;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    top: 70px;
   }
 }

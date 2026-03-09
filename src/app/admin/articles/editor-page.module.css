@@ -1,33 +1,47 @@
 .page {
-  width: min(1280px, calc(100vw - 2rem));
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 0 4rem;
-  display: grid;
-  gap: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 1.2rem 1.35rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line-soft));
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 15%, transparent), transparent 42%),
-    var(--surface-strong);
-  box-shadow: var(--shadow-soft);
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--line-soft);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
 .backLink {
-  color: var(--accent);
+  color: var(--text-muted);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--accent);
 }
 
 .intro {
   margin: 0;
   color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
 }

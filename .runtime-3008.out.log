@@ -1,0 +1,45 @@
+
+> china@0.1.0 dev
+> next dev --hostname 0.0.0.0 --port 3008
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3008
+- Network:       http://0.0.0.0:3008
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 2.1s
+ GET /about 200 in 2.8s (compile: 2.4s, render: 387ms)
+ GET / 200 in 2.5s (compile: 680ms, render: 1815ms)
+ GET /historical-places 200 in 238ms (compile: 111ms, render: 127ms)
+ GET /themes/modern-transformation 200 in 719ms (compile: 602ms, generate-params: 446ms, render: 116ms)
+ GET /themes/dynasties 200 in 143ms (compile: 40ms, generate-params: 25ms, render: 103ms)
+ GET /themes/dynasties 200 in 98ms (compile: 27ms, generate-params: 18ms, render: 71ms)
+ GET /themes/wars-and-revolutions 200 in 107ms (compile: 19ms, generate-params: 11ms, render: 88ms)
+ GET /themes/wars-and-revolutions 200 in 99ms (compile: 17ms, generate-params: 12ms, render: 82ms)
+✓ Compiled in 678ms
+ GET /themes/wars-and-revolutions 200 in 1618ms (compile: 134ms, generate-params: 12ms, render: 1484ms)
+ GET /about 200 in 441ms (compile: 174ms, render: 268ms)
+ GET /themes/dynasties 200 in 126ms (compile: 16ms, generate-params: 10ms, render: 110ms)
+✓ Compiled in 231ms
+ GET /about 200 in 321ms (compile: 87ms, render: 234ms)
+ GET /themes/modern-transformation 200 in 366ms (compile: 156ms, generate-params: 12ms, render: 209ms)
+ GET /articles 200 in 279ms (compile: 145ms, render: 135ms)
+ GET /about 200 in 127ms (compile: 13ms, render: 113ms)
+ GET / 200 in 413ms (compile: 185ms, render: 227ms)
+ GET /articles 200 in 143ms (compile: 7ms, render: 136ms)
+ GET /historical-places 200 in 261ms (compile: 151ms, render: 110ms)
+ GET / 200 in 178ms (compile: 12ms, render: 167ms)
+ GET /articles 200 in 153ms (compile: 11ms, render: 143ms)
+ GET /historical-places 200 in 85ms (compile: 8ms, render: 77ms)
+ GET /about 200 in 46ms (compile: 3ms, render: 42ms)
+ GET /themes/modern-transformation 200 in 118ms (compile: 15ms, generate-params: 11ms, render: 104ms)
+ GET /admin 307 in 616ms (compile: 262ms, render: 354ms)
+ GET /admin/login 200 in 843ms (compile: 580ms, render: 263ms)
+ POST /api/admin/login 200 in 917ms (compile: 583ms, render: 334ms)
+ GET /admin 200 in 571ms (compile: 4ms, render: 567ms)
+ GET /admin 200 in 596ms (compile: 10ms, render: 586ms)
+ GET /admin 200 in 327ms (compile: 12ms, render: 315ms)
+ GET /admin/articles 200 in 1028ms (compile: 654ms, render: 373ms)
+ GET /admin/articles/new 200 in 541ms (compile: 244ms, render: 297ms)
+ GET /feedback 200 in 841ms (compile: 697ms, render: 144ms)

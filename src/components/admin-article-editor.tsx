@@ -320,15 +320,15 @@ export function AdminArticleEditor({
 
   return (
     <div className={styles.editor}>
-      <div className={styles.topbar}>
+      <header className={styles.topbar}>
         <div>
-          <h1>{article ? "Edit article" : "New article"}</h1>
+          <h1>{article ? "Edit Article" : "Create New Article"}</h1>
           <div className={styles.statusMeta}>
-            <span>Status: {article?.status || "draft"}</span>
-            {article?.updatedAt ? <span>Updated: {new Date(article.updatedAt).toLocaleString()}</span> : null}
+            <span>Status: <strong>{article?.status || "draft"}</strong></span>
+            {article?.updatedAt ? <span>Last updated: {new Date(article.updatedAt).toLocaleString()}</span> : null}
             {publicUrl ? (
               <span>
-                Public URL:{" "}
+                Live link:{" "}
                 <Link href={publicUrl} target="_blank">
                   {publicUrl}
                 </Link>
@@ -337,22 +337,6 @@ export function AdminArticleEditor({
           </div>
         </div>
         <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.secondaryButton}
-            onClick={() => handleSave("draft")}
-            disabled={Boolean(pendingAction)}
-          >
-            {pendingAction === "draft" ? "Saving..." : "Save draft"}
-          </button>
-          <button
-            type="button"
-            className={styles.primaryButton}
-            onClick={() => handleSave("published")}
-            disabled={Boolean(pendingAction)}
-          >
-            {pendingAction === "published" ? "Publishing..." : "Publish article"}
-          </button>
           {article ? (
             <button
               type="button"
@@ -363,28 +347,48 @@ export function AdminArticleEditor({
               {pendingAction === "delete" ? "Deleting..." : "Delete"}
             </button>
           ) : null}
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => handleSave("draft")}
+            disabled={Boolean(pendingAction)}
+          >
+            {pendingAction === "draft" ? "Saving..." : "Save Draft"}
+          </button>
+          <button
+            type="button"
+            className={styles.primaryButton}
+            onClick={() => handleSave("published")}
+            disabled={Boolean(pendingAction)}
+          >
+            {pendingAction === "published" ? "Publishing..." : "Publish Now"}
+          </button>
         </div>
-      </div>
+      </header>
 
-      {message ? <p className={styles.message}>{message}</p> : null}
-      {error ? <p className={styles.error}>{error}</p> : null}
+      {message ? <div className={styles.messageBanner}>{message}</div> : null}
+      {error ? <div className={styles.errorBanner}>{error}</div> : null}
 
-      <section className={styles.panel}>
-        <h2>Article basics</h2>
-        <p>Set the main search framing, slug, hero image, and summary data first.</p>
+      <div className={styles.panel}>
+        <div className={styles.panelHeader}>
+          <h2>Basic Information</h2>
+          <p>Core metadata for the article identity and SEO.</p>
+        </div>
         <div className={styles.grid}>
           <div className={styles.field}>
-            <label htmlFor="article-title">Title</label>
+            <label htmlFor="article-title">Display Title</label>
             <input
               id="article-title"
+              placeholder="e.g. The Silk Road's Golden Age"
               value={form.title}
               onChange={(event) => handleTitleChange(event.target.value)}
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="article-slug">Slug</label>
+            <label htmlFor="article-slug">URL Slug</label>
             <input
               id="article-slug"
+              placeholder="the-silk-road-golden-age"
               value={form.slug}
               onChange={(event) => {
                 setSlugTouched(true);
@@ -393,31 +397,34 @@ export function AdminArticleEditor({
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="article-eyebrow">Eyebrow</label>
+            <label htmlFor="article-eyebrow">Eyebrow Text</label>
             <input
               id="article-eyebrow"
+              placeholder="e.g. TANG DYNASTY TRADE"
               value={form.eyebrow}
               onChange={(event) => handleFieldChange("eyebrow", event.target.value)}
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="article-reading-time">Reading time</label>
+            <label htmlFor="article-reading-time">Reading Time Estimate</label>
             <input
               id="article-reading-time"
+              placeholder="e.g. 8 min read"
               value={form.readingTime}
               onChange={(event) => handleFieldChange("readingTime", event.target.value)}
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="article-label">Published label</label>
+            <label htmlFor="article-label">Published Label</label>
             <input
               id="article-label"
+              placeholder="e.g. Special Feature"
               value={form.publishedLabel}
               onChange={(event) => handleFieldChange("publishedLabel", event.target.value)}
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="article-hero-image">Hero image</label>
+            <label htmlFor="article-hero-image">Hero Background Image</label>
             <select
               id="article-hero-image"
               value={form.heroImage}
@@ -431,85 +438,93 @@ export function AdminArticleEditor({
             </select>
           </div>
           <div className={`${styles.field} ${styles.fieldWide}`}>
-            <label htmlFor="article-excerpt">Excerpt</label>
+            <label htmlFor="article-excerpt">Short Excerpt (SEO Summary)</label>
             <textarea
               id="article-excerpt"
+              placeholder="A brief summary for card previews..."
               value={form.excerpt}
               onChange={(event) => handleFieldChange("excerpt", event.target.value)}
             />
           </div>
           <div className={`${styles.field} ${styles.fieldWide}`}>
-            <label htmlFor="article-search-angle">Search angle</label>
+            <label htmlFor="article-search-angle">Search Angle (Internal Context)</label>
             <textarea
               id="article-search-angle"
+              placeholder="How this article fits into search results..."
               value={form.searchAngle}
               onChange={(event) => handleFieldChange("searchAngle", event.target.value)}
             />
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className={styles.panel}>
-        <h2>Opening content</h2>
-        <p>Use one line per key point. Separate intro paragraphs with blank lines.</p>
+      <div className={styles.panel}>
+        <div className={styles.panelHeader}>
+          <h2>Intro & Highlights</h2>
+          <p>The first impression of the article.</p>
+        </div>
         <div className={styles.grid}>
           <div className={styles.field}>
-            <label htmlFor="article-key-points">Key points</label>
+            <label htmlFor="article-key-points">Key Points (Bullet Points)</label>
             <textarea
               id="article-key-points"
+              placeholder="One point per line..."
               value={form.keyPointsText}
               onChange={(event) => handleFieldChange("keyPointsText", event.target.value)}
             />
-            <span className={styles.helper}>One line per key point.</span>
+            <span className={styles.helper}>Displayed as a highlighted list.</span>
           </div>
           <div className={styles.field}>
-            <label htmlFor="article-intro">Intro paragraphs</label>
+            <label htmlFor="article-intro">Intro Paragraphs</label>
             <textarea
               id="article-intro"
+              placeholder="Enter text here. Use blank lines for new paragraphs..."
               value={form.introText}
               onChange={(event) => handleFieldChange("introText", event.target.value)}
             />
-            <span className={styles.helper}>Separate paragraphs with a blank line.</span>
+            <span className={styles.helper}>The opening text of the article.</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section className={styles.panel}>
-        <div className={styles.topbar}>
+      <div className={styles.panel}>
+        <div className={styles.sectionHeader}>
           <div>
-            <h2>Article sections</h2>
-            <p>Each section becomes one visual text band on the public article page.</p>
+            <h2>Content Sections</h2>
+            <p>Visual blocks with text and images.</p>
           </div>
-          <button type="button" className={styles.ghostButton} onClick={addSection}>
-            Add section
+          <button type="button" className={styles.secondaryButton} onClick={addSection}>
+            + Add Section
           </button>
         </div>
-        <div className={styles.editor}>
+        
+        <div className={styles.sectionsList}>
           {form.sections.map((section, index) => (
             <article key={`${section.title}-${index}`} className={styles.sectionCard}>
               <div className={styles.sectionHeader}>
-                <h3>Section {index + 1}</h3>
+                <h3>Section #{index + 1}</h3>
                 {form.sections.length > 1 ? (
                   <button
                     type="button"
                     className={styles.ghostButton}
                     onClick={() => removeSection(index)}
                   >
-                    Remove
+                    Remove Section
                   </button>
                 ) : null}
               </div>
               <div className={styles.grid}>
                 <div className={styles.field}>
-                  <label htmlFor={`section-title-${index}`}>Section title</label>
+                  <label htmlFor={`section-title-${index}`}>Section Title</label>
                   <input
                     id={`section-title-${index}`}
+                    placeholder="Section Heading"
                     value={section.title}
                     onChange={(event) => handleSectionChange(index, "title", event.target.value)}
                   />
                 </div>
                 <div className={styles.field}>
-                  <label htmlFor={`section-image-${index}`}>Section image</label>
+                  <label htmlFor={`section-image-${index}`}>Section Image</label>
                   <select
                     id={`section-image-${index}`}
                     value={section.image}
@@ -525,73 +540,84 @@ export function AdminArticleEditor({
                   </select>
                 </div>
                 <div className={`${styles.field} ${styles.fieldWide}`}>
-                  <label htmlFor={`section-body-${index}`}>Body paragraphs</label>
+                  <label htmlFor={`section-body-${index}`}>Body Text</label>
                   <textarea
                     id={`section-body-${index}`}
+                    placeholder="Enter section content..."
                     value={section.bodyText}
                     onChange={(event) => handleSectionChange(index, "bodyText", event.target.value)}
                   />
-                  <span className={styles.helper}>Separate paragraphs with a blank line.</span>
+                  <span className={styles.helper}>Separate paragraphs with blank lines.</span>
                 </div>
                 <div className={`${styles.field} ${styles.fieldWide}`}>
-                  <label htmlFor={`section-bullets-${index}`}>Bullets</label>
+                  <label htmlFor={`section-bullets-${index}`}>Section Bullets (Optional)</label>
                   <textarea
                     id={`section-bullets-${index}`}
+                    placeholder="One bullet per line..."
                     value={section.bulletsText}
                     onChange={(event) =>
                       handleSectionChange(index, "bulletsText", event.target.value)
                     }
                   />
-                  <span className={styles.helper}>Optional. One line per bullet.</span>
                 </div>
               </div>
             </article>
           ))}
         </div>
-      </section>
+      </div>
 
-      <section className={styles.panel}>
-        <h2>Internal links and backlinks</h2>
-        <p>Select related articles and site sections to strengthen internal linking.</p>
+      <div className={styles.panel}>
+        <div className={styles.panelHeader}>
+          <h2>Navigation & Connectivity</h2>
+          <p>Link this article to other parts of the Atlas.</p>
+        </div>
         <div className={styles.grid}>
           <div className={styles.field}>
-            <label>Related articles</label>
+            <label>Related Articles</label>
             <div className={styles.checkboxGrid}>
-              {relatedArticleOptions.map((option) => (
-                <label key={option.slug} className={styles.checkboxCard}>
-                  <span className={styles.checkboxRow}>
-                    <input
-                      type="checkbox"
-                      checked={form.relatedArticles.includes(option.slug)}
-                      onChange={() => toggleRelatedArticle(option.slug)}
-                    />
-                    <span>{option.title}</span>
-                  </span>
-                  <span className={styles.checkboxSlug}>/{option.slug}</span>
-                </label>
-              ))}
+              {relatedArticleOptions.length === 0 ? (
+                <p className={styles.helper}>No other Mongo articles available to link.</p>
+              ) : (
+                relatedArticleOptions.map((option) => (
+                  <label key={option.slug} className={styles.checkboxCard}>
+                    <div className={styles.checkboxRow}>
+                      <input
+                        type="checkbox"
+                        checked={form.relatedArticles.includes(option.slug)}
+                        onChange={() => toggleRelatedArticle(option.slug)}
+                      />
+                      <div className={styles.checkboxLabel}>
+                        <span className={styles.checkboxTitle}>{option.title}</span>
+                        <span className={styles.checkboxSlug}>/{option.slug}</span>
+                      </div>
+                    </div>
+                  </label>
+                ))
+              )}
             </div>
           </div>
           <div className={styles.field}>
-            <label>Atlas links</label>
+            <label>Atlas Site Links</label>
             <div className={styles.checkboxGrid}>
               {siteLinkOptions.map((option) => (
                 <label key={option.href} className={styles.checkboxCard}>
-                  <span className={styles.checkboxRow}>
+                  <div className={styles.checkboxRow}>
                     <input
                       type="checkbox"
                       checked={form.relatedSiteLinks.includes(option.href)}
                       onChange={() => toggleSiteLink(option.href)}
                     />
-                    <span>{option.label}</span>
-                  </span>
-                  <span className={styles.checkboxSlug}>{option.href}</span>
+                    <div className={styles.checkboxLabel}>
+                      <span className={styles.checkboxTitle}>{option.label}</span>
+                      <span className={styles.checkboxSlug}>{option.href}</span>
+                    </div>
+                  </div>
                 </label>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
