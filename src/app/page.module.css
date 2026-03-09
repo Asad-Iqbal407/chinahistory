@@ -158,6 +158,7 @@
 }
 
 .mapSection,
+.useCasesSection,
 .themeSection,
 .timelineSection,
 .archiveSection {
@@ -178,6 +179,55 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 2px 6px rgba(223, 177, 92, 0.2));
+}
+
+.useCaseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.useCaseCard {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.7rem;
+  background: var(--panel);
+  box-shadow: 0 24px 70px rgba(4, 9, 14, 0.28), 0 0 40px rgba(223, 177, 92, 0.05);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.useCaseCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(4, 9, 14, 0.4), 0 0 40px rgba(223, 177, 92, 0.12);
+}
+
+.useCaseImage {
+  position: relative;
+  min-height: 250px;
+}
+
+.useCaseImage :global(img) {
+  object-fit: cover;
+}
+
+.useCaseBody {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.2rem;
+}
+
+.useCaseBody h3 {
+  font-size: 1.9rem;
+}
+
+.useCaseMeta {
+  color: rgba(223, 177, 92, 0.84);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
 }
 
 .themeGrid {
@@ -288,6 +338,7 @@
 
 @media (max-width: 1080px) {
   .hero,
+  .useCaseGrid,
   .themeGrid,
   .timelineGrid,
   .archiveGrid {
@@ -301,6 +352,7 @@
 
 @media (max-width: 820px) {
   .hero,
+  .useCaseGrid,
   .themeGrid,
   .timelineGrid,
   .archiveGrid {

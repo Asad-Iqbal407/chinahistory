@@ -4,12 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { StructuredData } from "@/components/structured-data";
 import { imageCatalog } from "@/data/china-content";
 import {
   civilizationTopicOrder,
   civilizationTopics,
   getCivilizationTopic,
 } from "@/data/civilization-content";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 import styles from "./page.module.css";
 
@@ -29,10 +36,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Civilization topic not found | China Atlas" };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${civilizationTopic.title} | China Atlas`,
     description: civilizationTopic.preview,
-  };
+    path: `/themes/civilization/${civilizationTopic.slug}`,
+    image: imageCatalog[civilizationTopic.heroImage].src,
+    keywords: [civilizationTopic.shortTitle, "China civilization", "Chinese civilization history"],
+    type: "article",
+  });
 }
 
 export default async function CivilizationTopicPage({ params }: PageProps) {
@@ -45,9 +56,33 @@ export default async function CivilizationTopicPage({ params }: PageProps) {
 
   const heroImage = imageCatalog[civilizationTopic.heroImage];
   const relatedTopics = civilizationTopic.related.map((slug) => civilizationTopics[slug]);
+  const topicPath = `/themes/civilization/${civilizationTopic.slug}`;
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Civilization", href: "/themes/civilization" },
+    { label: civilizationTopic.title, href: topicPath },
+  ];
 
   return (
     <article className={styles.page} style={{ "--topic-accent": civilizationTopic.accent } as CSSProperties}>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildArticleSchema({
+            title: civilizationTopic.title,
+            description: civilizationTopic.preview,
+            path: topicPath,
+            image: heroImage.src,
+            section: "Civilization",
+            keywords: [
+              civilizationTopic.shortTitle,
+              "China civilization",
+              "Chinese civilization history",
+            ],
+          }),
+        ]}
+      />
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
           <Link href="/themes/civilization" className={styles.backLink}>

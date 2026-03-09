@@ -3,6 +3,15 @@ import Link from "next/link";
 import { Cormorant_Garamond, Public_Sans } from "next/font/google";
 
 import { SiteHeader } from "@/components/site-header";
+import { themeList } from "@/data/china-content";
+import {
+  absoluteUrl,
+  defaultKeywords,
+  defaultSeoImage,
+  defaultSiteDescription,
+  siteName,
+  siteUrl,
+} from "@/lib/site-config";
 
 import "./globals.css";
 
@@ -17,10 +26,48 @@ const cormorant = Cormorant_Garamond({
   weight: ["500", "600", "700"],
 });
 
+const atlasLinks = [
+  { href: "/", label: "Home Atlas" },
+  { href: "/articles", label: "Articles" },
+  { href: "/historical-places", label: "Historical Places" },
+  { href: "/feedback", label: "Feedback" },
+];
+
+const themeColumns = [themeList.slice(0, 3), themeList.slice(3)];
+
 export const metadata: Metadata = {
-  title: "China Atlas",
-  description:
-    "An immersive Next.js atlas of China's civilization, dynasties, wars, century of humiliation, scientific progress, and modern transformation.",
+  metadataBase: new URL(siteUrl),
+  title: siteName,
+  description: defaultSiteDescription,
+  applicationName: siteName,
+  keywords: defaultKeywords,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: siteName,
+    description: defaultSiteDescription,
+    siteName,
+    locale: "en_US",
+    images: [
+      {
+        url: absoluteUrl(defaultSeoImage),
+        alt: siteName,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: defaultSiteDescription,
+    images: [absoluteUrl(defaultSeoImage)],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -41,17 +88,23 @@ export default function RootLayout({
             </div>
             <div className="footer-links">
               <div className="footer-col">
-                <h4>Explore</h4>
-                <Link href="/historical-places">Historical Places</Link>
-                <Link href="/themes/civilization">Civilization</Link>
-                <Link href="/themes/dynasties">Dynasties</Link>
-                <Link href="/themes/wars-and-revolutions">Wars & Revolutions</Link>
+                <h4>Atlas</h4>
+                {atlasLinks.map((link) => (
+                  <Link key={link.href} href={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
               </div>
-              <div className="footer-col">
-                <h4>Discover</h4>
-                <Link href="/themes/science-and-innovation">Science & Innovation</Link>
-                <Link href="/themes/modern-transformation">Modern Transformation</Link>
-              </div>
+              {themeColumns.map((column, index) => (
+                <div key={index} className="footer-col">
+                  <h4>{index === 0 ? "Theme Pages" : "More Themes"}</h4>
+                  {column.map((theme) => (
+                    <Link key={theme.slug} href={`/themes/${theme.slug}`}>
+                      {theme.title}
+                    </Link>
+                  ))}
+                </div>
+              ))}
             </div>
             <p className="footer-bottom">Use the map, timelines, and theme pages to move from geography to long-term history.</p>
           </footer>

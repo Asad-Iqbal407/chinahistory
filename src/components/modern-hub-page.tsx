@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { imageCatalog, themes } from "@/data/china-content";
 import { modernHub, modernTopicOrder, modernTopics } from "@/data/modern-content";
 
@@ -9,9 +10,14 @@ import styles from "./modern-hub-page.module.css";
 export function ModernHubPage() {
   const theme = themes["modern-transformation"];
   const topicList = modernTopicOrder.map((slug) => modernTopics[slug]);
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: theme.title, href: "/themes/modern-transformation" },
+  ];
 
   return (
     <article className={styles.page}>
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
           <Link href="/" className={styles.backLink}>

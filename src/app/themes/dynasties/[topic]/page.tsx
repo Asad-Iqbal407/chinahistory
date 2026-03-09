@@ -4,12 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { StructuredData } from "@/components/structured-data";
 import { imageCatalog } from "@/data/china-content";
 import {
   dynastyTopicOrder,
   dynastyTopics,
   getDynastyTopic,
 } from "@/data/dynasties-content";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 import styles from "./page.module.css";
 
@@ -29,10 +36,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Dynasty topic not found | China Atlas" };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${dynastyTopic.title} | China Atlas`,
     description: dynastyTopic.preview,
-  };
+    path: `/themes/dynasties/${dynastyTopic.slug}`,
+    image: imageCatalog[dynastyTopic.heroImage].src,
+    keywords: [dynastyTopic.shortTitle, "Chinese dynasties", "China imperial history"],
+    type: "article",
+  });
 }
 
 export default async function DynastyTopicPage({ params }: PageProps) {
@@ -45,9 +56,33 @@ export default async function DynastyTopicPage({ params }: PageProps) {
 
   const heroImage = imageCatalog[dynastyTopic.heroImage];
   const relatedTopics = dynastyTopic.related.map((slug) => dynastyTopics[slug]);
+  const topicPath = `/themes/dynasties/${dynastyTopic.slug}`;
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Dynasties", href: "/themes/dynasties" },
+    { label: dynastyTopic.title, href: topicPath },
+  ];
 
   return (
     <article className={styles.page} style={{ "--topic-accent": dynastyTopic.accent } as CSSProperties}>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildArticleSchema({
+            title: dynastyTopic.title,
+            description: dynastyTopic.preview,
+            path: topicPath,
+            image: heroImage.src,
+            section: "Dynasties",
+            keywords: [
+              dynastyTopic.shortTitle,
+              "Chinese dynasties",
+              "China imperial history",
+            ],
+          }),
+        ]}
+      />
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <Image

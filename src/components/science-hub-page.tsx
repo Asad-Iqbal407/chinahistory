@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { imageCatalog, themes } from "@/data/china-content";
 import { scienceHub, scienceTopicOrder, scienceTopics } from "@/data/science-content";
 
@@ -9,9 +10,14 @@ import styles from "./science-hub-page.module.css";
 export function ScienceHubPage() {
   const theme = themes["science-and-innovation"];
   const topicList = scienceTopicOrder.map((slug) => scienceTopics[slug]);
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: theme.title, href: "/themes/science-and-innovation" },
+  ];
 
   return (
     <article className={styles.page}>
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroOrb}>
           <div className={styles.heroImageWrap}>

@@ -4,12 +4,25 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CivilizationHubPage } from "@/components/civilization-hub-page";
 import { DynastiesHubPage } from "@/components/dynasties-hub-page";
 import { ModernHubPage } from "@/components/modern-hub-page";
 import { ScienceHubPage } from "@/components/science-hub-page";
+import { StructuredData } from "@/components/structured-data";
 import { WarsHubPage } from "@/components/wars-hub-page";
+import { civilizationTopicOrder, civilizationTopics } from "@/data/civilization-content";
+import { dynastyTopicOrder, dynastyTopics } from "@/data/dynasties-content";
 import { getTheme, imageCatalog, themeOrder, themes } from "@/data/china-content";
+import { modernTopicOrder, modernTopics } from "@/data/modern-content";
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+  buildItemListSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
+import { scienceTopicOrder, scienceTopics } from "@/data/science-content";
+import { warTopicOrder, warTopics } from "@/data/wars-content";
 
 import styles from "./page.module.css";
 
@@ -21,6 +34,45 @@ export function generateStaticParams() {
   return themeOrder.map((slug) => ({ slug }));
 }
 
+function getThemeItemList(slug: string) {
+  if (slug === "civilization") {
+    return civilizationTopicOrder.map((topic) => ({
+      name: civilizationTopics[topic].title,
+      path: `/themes/civilization/${topic}`,
+    }));
+  }
+
+  if (slug === "dynasties") {
+    return dynastyTopicOrder.map((topic) => ({
+      name: dynastyTopics[topic].title,
+      path: `/themes/dynasties/${topic}`,
+    }));
+  }
+
+  if (slug === "science-and-innovation") {
+    return scienceTopicOrder.map((topic) => ({
+      name: scienceTopics[topic].title,
+      path: `/themes/science-and-innovation/${topic}`,
+    }));
+  }
+
+  if (slug === "wars-and-revolutions") {
+    return warTopicOrder.map((topic) => ({
+      name: warTopics[topic].title,
+      path: `/themes/wars-and-revolutions/${topic}`,
+    }));
+  }
+
+  if (slug === "modern-transformation") {
+    return modernTopicOrder.map((topic) => ({
+      name: modernTopics[topic].title,
+      path: `/themes/modern-transformation/${topic}`,
+    }));
+  }
+
+  return undefined;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const theme = getTheme(slug);
@@ -29,10 +81,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Theme not found | China Atlas" };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${theme.title} | China Atlas`,
     description: theme.preview,
-  };
+    path: `/themes/${theme.slug}`,
+    image: imageCatalog[theme.heroImage].src,
+    keywords: [theme.title, theme.navLabel, theme.eyebrow],
+  });
 }
 
 export default async function ThemePage({ params }: PageProps) {
@@ -43,31 +98,79 @@ export default async function ThemePage({ params }: PageProps) {
     notFound();
   }
 
+  const themePath = `/themes/${theme.slug}`;
+  const heroImage = imageCatalog[theme.heroImage];
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: theme.title, href: themePath },
+  ];
+  const themeSchemas: Array<Record<string, unknown>> = [
+    buildBreadcrumbSchema(breadcrumbs),
+    buildCollectionPageSchema({
+      title: `${theme.title} | China Atlas`,
+      description: theme.preview,
+      path: themePath,
+      image: heroImage.src,
+      keywords: [theme.title, theme.navLabel, theme.eyebrow],
+    }),
+  ];
+  const themeItemList = getThemeItemList(theme.slug);
+
+  if (themeItemList) {
+    themeSchemas.push(buildItemListSchema(`${theme.title} topics`, themePath, themeItemList));
+  }
+
   if (theme.slug === "civilization") {
-    return <CivilizationHubPage />;
+    return (
+      <>
+        <StructuredData data={themeSchemas} />
+        <CivilizationHubPage />
+      </>
+    );
   }
 
   if (theme.slug === "dynasties") {
-    return <DynastiesHubPage />;
+    return (
+      <>
+        <StructuredData data={themeSchemas} />
+        <DynastiesHubPage />
+      </>
+    );
   }
 
   if (theme.slug === "science-and-innovation") {
-    return <ScienceHubPage />;
+    return (
+      <>
+        <StructuredData data={themeSchemas} />
+        <ScienceHubPage />
+      </>
+    );
   }
 
   if (theme.slug === "wars-and-revolutions") {
-    return <WarsHubPage />;
+    return (
+      <>
+        <StructuredData data={themeSchemas} />
+        <WarsHubPage />
+      </>
+    );
   }
 
   if (theme.slug === "modern-transformation") {
-    return <ModernHubPage />;
+    return (
+      <>
+        <StructuredData data={themeSchemas} />
+        <ModernHubPage />
+      </>
+    );
   }
 
-  const heroImage = imageCatalog[theme.heroImage];
   const relatedThemes = theme.relatedThemes.map((relatedSlug) => themes[relatedSlug]);
 
   return (
     <article className={styles.page} style={{ "--accent": theme.accent } as CSSProperties}>
+      <StructuredData data={themeSchemas} />
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <Image

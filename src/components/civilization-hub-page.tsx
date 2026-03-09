@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { imageCatalog, themes } from "@/data/china-content";
 import {
   civilizationHub,
@@ -13,9 +14,14 @@ import styles from "./civilization-hub-page.module.css";
 export function CivilizationHubPage() {
   const theme = themes.civilization;
   const topicList = civilizationTopicOrder.map((slug) => civilizationTopics[slug]);
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: theme.title, href: "/themes/civilization" },
+  ];
 
   return (
     <article className={styles.page}>
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
           <Link href="/" className={styles.backLink}>

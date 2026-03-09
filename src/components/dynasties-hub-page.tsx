@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { imageCatalog, themes } from "@/data/china-content";
 import {
   dynastiesHub,
@@ -13,9 +14,14 @@ import styles from "./dynasties-hub-page.module.css";
 export function DynastiesHubPage() {
   const theme = themes.dynasties;
   const topicList = dynastyTopicOrder.map((slug) => dynastyTopics[slug]);
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: theme.title, href: "/themes/dynasties" },
+  ];
 
   return (
     <article className={styles.page}>
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroFrame}>
           <div className={styles.heroBackdrop}>

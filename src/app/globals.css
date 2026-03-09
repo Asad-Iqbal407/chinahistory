@@ -166,6 +166,7 @@ select {
 .footer-links {
   grid-area: links;
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
 }
 

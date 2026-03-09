@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { imageCatalog, themes } from "@/data/china-content";
 import { warTopicOrder, warTopics, warsHub } from "@/data/wars-content";
 
@@ -9,9 +10,14 @@ import styles from "./wars-hub-page.module.css";
 export function WarsHubPage() {
   const theme = themes["wars-and-revolutions"];
   const topicList = warTopicOrder.map((slug) => warTopics[slug]);
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: theme.title, href: "/themes/wars-and-revolutions" },
+  ];
 
   return (
     <article className={styles.page}>
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroFrame}>
           <div className={styles.heroBackdrop}>

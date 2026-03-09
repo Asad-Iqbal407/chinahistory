@@ -1,70 +1,122 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { StructuredData } from "@/components/structured-data";
 import { imageCatalog } from "@/data/china-content";
 import {
   historicalPlaceGroups,
   historicalPlacesHero,
 } from "@/data/historical-places";
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+  buildItemListSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Historical Places | China Atlas",
-  description:
-    "A curated guide to major historical places across China, with short descriptions of key cities, capitals, temples, routes, and memory sites.",
-};
+const historicalPlacesTitle = "Historical Places | China Atlas";
+const historicalPlacesDescription =
+  "A curated guide to major historical places across China, from ancient cities and capitals to cave temples, canals, and modern memory sites.";
+const historicalPlacesKeywords = [
+  "historical places in China",
+  "China landmarks history",
+  "Chinese capitals and heritage sites",
+  "China heritage travel guide",
+];
+
+function toAnchor(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export const metadata = buildPageMetadata({
+  title: historicalPlacesTitle,
+  description: historicalPlacesDescription,
+  path: "/historical-places",
+  image: imageCatalog["great-wall-jinshanling"].src,
+  keywords: historicalPlacesKeywords,
+});
 
 export default function HistoricalPlacesPage() {
-  return (
-    <article className={styles.page}>
-      <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <Link href="/" className={styles.backLink}>
-            Back to map atlas
-          </Link>
-          <p className={styles.eyebrow}>{historicalPlacesHero.eyebrow}</p>
-          <h1>{historicalPlacesHero.title}</h1>
-          <p className={styles.subtitle}>{historicalPlacesHero.subtitle}</p>
-          <div className={styles.metrics}>
-            {historicalPlacesHero.metrics.map((metric) => (
-              <article key={metric.label} className={styles.metricCard}>
-                <span>{metric.label}</span>
-                <strong>{metric.value}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Historical Places", href: "/historical-places" },
+  ];
+  const placeEntries = historicalPlaceGroups.flatMap((group) =>
+    group.places.map((place) => ({
+      name: place.name,
+      path: `/historical-places#${toAnchor(`${group.slug}-${place.name}`)}`,
+    })),
+  );
 
-        <div className={styles.heroMosaic}>
-          <div className={styles.mosaicMain}>
-            <Image
-              src={imageCatalog["great-wall-jinshanling"].src}
-              alt={imageCatalog["great-wall-jinshanling"].alt}
-              fill
-              priority
-              sizes="(max-width: 900px) 100vw, 34vw"
-            />
+  return (
+    <>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildCollectionPageSchema({
+            title: historicalPlacesTitle,
+            description: historicalPlacesDescription,
+            path: "/historical-places",
+            image: imageCatalog["great-wall-jinshanling"].src,
+            keywords: historicalPlacesKeywords,
+          }),
+          buildItemListSchema("Historical places in China", "/historical-places", placeEntries),
+        ]}
+      />
+      <article className={styles.page}>
+        <Breadcrumbs items={breadcrumbs} />
+        <section className={styles.hero}>
+          <div className={styles.heroCopy}>
+            <Link href="/" className={styles.backLink}>
+              Back to map atlas
+            </Link>
+            <p className={styles.eyebrow}>{historicalPlacesHero.eyebrow}</p>
+            <h1>{historicalPlacesHero.title}</h1>
+            <p className={styles.subtitle}>{historicalPlacesHero.subtitle}</p>
+            <div className={styles.metrics}>
+              {historicalPlacesHero.metrics.map((metric) => (
+                <article key={metric.label} className={styles.metricCard}>
+                  <span>{metric.label}</span>
+                  <strong>{metric.value}</strong>
+                </article>
+              ))}
+            </div>
           </div>
-          <div className={styles.mosaicSmall}>
-            <Image
-              src={imageCatalog["terracotta-army"].src}
-              alt={imageCatalog["terracotta-army"].alt}
-              fill
-              sizes="(max-width: 900px) 100vw, 18vw"
-            />
+
+          <div className={styles.heroMosaic}>
+            <div className={styles.mosaicMain}>
+              <Image
+                src={imageCatalog["great-wall-jinshanling"].src}
+                alt={imageCatalog["great-wall-jinshanling"].alt}
+                fill
+                priority
+                sizes="(max-width: 900px) 100vw, 34vw"
+              />
+            </div>
+            <div className={styles.mosaicSmall}>
+              <Image
+                src={imageCatalog["terracotta-army"].src}
+                alt={imageCatalog["terracotta-army"].alt}
+                fill
+                sizes="(max-width: 900px) 100vw, 18vw"
+              />
+            </div>
+            <div className={styles.mosaicWide}>
+              <Image
+                src={imageCatalog["dunhuang-mural"].src}
+                alt={imageCatalog["dunhuang-mural"].alt}
+                fill
+                sizes="(max-width: 900px) 100vw, 22vw"
+              />
+            </div>
           </div>
-          <div className={styles.mosaicWide}>
-            <Image
-              src={imageCatalog["dunhuang-mural"].src}
-              alt={imageCatalog["dunhuang-mural"].alt}
-              fill
-              sizes="(max-width: 900px) 100vw, 22vw"
-            />
-          </div>
-        </div>
-      </section>
+        </section>
 
       <section className={styles.introSection}>
         <div className={styles.sectionHeading}>
@@ -115,7 +167,11 @@ export default function HistoricalPlacesPage() {
 
             <div className={styles.placeGrid}>
               {group.places.map((place) => (
-                <article key={place.name} className={styles.placeCard}>
+                <article
+                  key={place.name}
+                  id={toAnchor(`${group.slug}-${place.name}`)}
+                  className={styles.placeCard}
+                >
                   <div className={styles.placeImage}>
                     <Image
                       src={imageCatalog[place.image].src}
@@ -159,6 +215,7 @@ export default function HistoricalPlacesPage() {
           </Link>
         </div>
       </section>
-    </article>
+      </article>
+    </>
   );
 }

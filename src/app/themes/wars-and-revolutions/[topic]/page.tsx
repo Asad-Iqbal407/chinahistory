@@ -4,8 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { StructuredData } from "@/components/structured-data";
 import { imageCatalog } from "@/data/china-content";
 import { getWarTopic, warTopicOrder, warTopics } from "@/data/wars-content";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 import styles from "./page.module.css";
 
@@ -25,10 +32,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "War topic not found | China Atlas" };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${warTopic.title} | China Atlas`,
     description: warTopic.preview,
-  };
+    path: `/themes/wars-and-revolutions/${warTopic.slug}`,
+    image: imageCatalog[warTopic.heroImage].src,
+    keywords: [warTopic.shortTitle, "China wars", "Chinese military history"],
+    type: "article",
+  });
 }
 
 export default async function WarTopicPage({ params }: PageProps) {
@@ -41,9 +52,29 @@ export default async function WarTopicPage({ params }: PageProps) {
 
   const heroImage = imageCatalog[warTopic.heroImage];
   const relatedTopics = warTopic.related.map((slug) => warTopics[slug]);
+  const topicPath = `/themes/wars-and-revolutions/${warTopic.slug}`;
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Wars and Revolutions", href: "/themes/wars-and-revolutions" },
+    { label: warTopic.title, href: topicPath },
+  ];
 
   return (
     <article className={styles.page} style={{ "--topic-accent": warTopic.accent } as CSSProperties}>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildArticleSchema({
+            title: warTopic.title,
+            description: warTopic.preview,
+            path: topicPath,
+            image: heroImage.src,
+            section: "Wars and Revolutions",
+            keywords: [warTopic.shortTitle, "China wars", "Chinese military history"],
+          }),
+        ]}
+      />
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <Image

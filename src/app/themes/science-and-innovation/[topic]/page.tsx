@@ -4,12 +4,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { StructuredData } from "@/components/structured-data";
 import { imageCatalog } from "@/data/china-content";
 import {
   getScienceTopic,
   scienceTopicOrder,
   scienceTopics,
 } from "@/data/science-content";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 import styles from "./page.module.css";
 
@@ -29,10 +36,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Science topic not found | China Atlas" };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${scienceTopic.title} | China Atlas`,
     description: scienceTopic.preview,
-  };
+    path: `/themes/science-and-innovation/${scienceTopic.slug}`,
+    image: imageCatalog[scienceTopic.heroImage].src,
+    keywords: [scienceTopic.shortTitle, "China science", "Chinese scientific progress"],
+    type: "article",
+  });
 }
 
 export default async function ScienceTopicPage({ params }: PageProps) {
@@ -45,9 +56,33 @@ export default async function ScienceTopicPage({ params }: PageProps) {
 
   const heroImage = imageCatalog[scienceTopic.heroImage];
   const relatedTopics = scienceTopic.related.map((slug) => scienceTopics[slug]);
+  const topicPath = `/themes/science-and-innovation/${scienceTopic.slug}`;
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Science and Innovation", href: "/themes/science-and-innovation" },
+    { label: scienceTopic.title, href: topicPath },
+  ];
 
   return (
     <article className={styles.page} style={{ "--topic-accent": scienceTopic.accent } as CSSProperties}>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildArticleSchema({
+            title: scienceTopic.title,
+            description: scienceTopic.preview,
+            path: topicPath,
+            image: heroImage.src,
+            section: "Science and Innovation",
+            keywords: [
+              scienceTopic.shortTitle,
+              "China science",
+              "Chinese scientific progress",
+            ],
+          }),
+        ]}
+      />
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroImage}>
           <Image

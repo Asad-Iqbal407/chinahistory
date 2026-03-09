@@ -1,0 +1,66 @@
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.field input {
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+  background: var(--surface-strong);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+.field input:focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 48%, transparent);
+  outline-offset: 2px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.submit {
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.35rem;
+  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 60%, #f0d17c));
+  color: #fffaf1;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.error {
+  margin: 0;
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  background: color-mix(in srgb, #b12424 10%, var(--surface-strong));
+  color: #7f1313;
+}
+
+.hint {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}

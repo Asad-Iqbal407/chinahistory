@@ -4,8 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { StructuredData } from "@/components/structured-data";
 import { imageCatalog } from "@/data/china-content";
 import { getModernTopic, modernTopicOrder, modernTopics } from "@/data/modern-content";
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildPageMetadata,
+} from "@/lib/seo";
 
 import styles from "./page.module.css";
 
@@ -25,10 +32,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Modern topic not found | China Atlas" };
   }
 
-  return {
+  return buildPageMetadata({
     title: `${modernTopic.title} | China Atlas`,
     description: modernTopic.preview,
-  };
+    path: `/themes/modern-transformation/${modernTopic.slug}`,
+    image: imageCatalog[modernTopic.heroImage].src,
+    keywords: [modernTopic.shortTitle, "modern China", "China transformation"],
+    type: "article",
+  });
 }
 
 export default async function ModernTopicPage({ params }: PageProps) {
@@ -41,9 +52,29 @@ export default async function ModernTopicPage({ params }: PageProps) {
 
   const heroImage = imageCatalog[modernTopic.heroImage];
   const relatedTopics = modernTopic.related.map((slug) => modernTopics[slug]);
+  const topicPath = `/themes/modern-transformation/${modernTopic.slug}`;
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Modern Transformation", href: "/themes/modern-transformation" },
+    { label: modernTopic.title, href: topicPath },
+  ];
 
   return (
     <article className={styles.page} style={{ "--topic-accent": modernTopic.accent } as CSSProperties}>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema(breadcrumbs),
+          buildArticleSchema({
+            title: modernTopic.title,
+            description: modernTopic.preview,
+            path: topicPath,
+            image: heroImage.src,
+            section: "Modern Transformation",
+            keywords: [modernTopic.shortTitle, "modern China", "China transformation"],
+          }),
+        ]}
+      />
+      <Breadcrumbs items={breadcrumbs} />
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
           <Link href="/themes/modern-transformation" className={styles.backLink}>

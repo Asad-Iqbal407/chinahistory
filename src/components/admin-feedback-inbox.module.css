@@ -1,0 +1,115 @@
+.stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.error {
+  margin: 0;
+  border-radius: 18px;
+  padding: 0.95rem 1rem;
+  background: color-mix(in srgb, #b12424 12%, var(--surface-base));
+  color: #851919;
+}
+
+.card {
+  border: 1px solid var(--line-soft);
+  border-radius: 24px;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--surface-base) 82%, #fff), var(--surface-base));
+}
+
+.cardNew {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line-soft));
+  box-shadow: 0 18px 40px rgba(18, 23, 34, 0.08);
+}
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.titleBlock {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.titleBlock h3 {
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.kindBadge,
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.kindBadge {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface-base));
+  color: var(--accent);
+}
+
+.statusNew {
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface-base));
+  color: var(--accent);
+}
+
+.statusReviewed {
+  background: color-mix(in srgb, #235ea6 12%, var(--surface-base));
+  color: #24528a;
+}
+
+.statusArchived {
+  background: color-mix(in srgb, #677487 12%, var(--surface-base));
+  color: #596474;
+}
+
+.message {
+  margin: 0 0 0.8rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.72;
+  cursor: wait;
+}
+
+.empty {
+  margin: 0;
+  color: var(--text-muted);
+}
